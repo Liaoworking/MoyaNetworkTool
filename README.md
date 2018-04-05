@@ -1,11 +1,3 @@
-
-#####踩坑踩了4天总算把基于Moya的网络框架搭建完毕
-
-#####看网上关于Moya的教程不太多，大多都是一样的，还有一些年久失修。这里专门讲讲关于moya的搭建及容易遇到的一些坑。
-
-
-
-
 #重要的东西放到最前面
 
 
@@ -16,6 +8,13 @@
 
 
 #####3.写案例不给Demo不太好吧。
+
+
+
+踩坑踩了4天总算把基于Moya的网络框架搭建完毕
+
+看网上关于Moya的教程不太多，大多都是一样的，还有一些年久失修。这里专门讲讲关于moya的搭建及容易遇到的一些坑。
+
 
 
 #为什么选择moya：
@@ -36,6 +35,7 @@
 上文作为入门是一篇不错的文章，但作为实际开发过程中，健壮全方位考虑的网络框架来说的来说还有很多用法并没有提及。 而且网上很多文章都是老版本，看的时候会感觉有些懵。。。所以我就写了本文😑
 
 # **Let's Begin**
+
 
 ####**封装的目录结构**
 
@@ -135,10 +135,12 @@ extension API:TargetType{
 
 
 ###NetworkManager.swift
+
 下面就开始构建我们的请求相关的东西
 主要是完成对于Provider的完善及个性化设置。
 
 首先先看一个最简单的网络请求, 我们所有的请求都是来自于这个provider对象，测试一下 我们就能发出请求并拿到返回的结果。
+
 ```swift
         let provier = MoyaProvider<API>()
         provier.request(.testApi) { (result) in
@@ -153,6 +155,7 @@ extension API:TargetType{
 ```
 
 当然，对应情况复杂的项目这个是***远远不够滴！***
+
 so~ 下面开始对provider进行改造
 
 先看看最丰满的provider是什么样子的
@@ -164,7 +167,9 @@ so~ 下面开始对provider进行改造
 
 点进去看源码才发现Moya已经帮我们把每个参数都默认实现了一遍。***我们可以根据自己的设计需求设置参数***
 每个参数什么意思也不赘述了，[Moya 的初始化](https://www.jianshu.com/p/7286503db415)  这篇文章也都说了。
+
 ####上文需要指正的地方是：
+
 ![image.png](https://upload-images.jianshu.io/upload_images/1724449-0f482299295f6d84.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 文中 endpointClosure 的使用举例中 target.parameters 已经没有这个属性了。现在版本的Moya用的task代替的。
