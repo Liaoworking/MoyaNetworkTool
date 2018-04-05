@@ -3,11 +3,15 @@
 看网上关于Moya的教程不太多，大多都是一样的，还有一些年久失修。这里专门讲讲关于moya的搭建及容易遇到的一些坑。
 
 #重要的东西放到最前面
+
 #####1.最好的教材是官方文档和Demo，Moya有[中文文档](https://github.com/Moya/Moya/tree/master/docs_CN)。
+
 #####2.尝试一些不一样的东西会让开发更有趣。
+
 #####3.写案例不给Demo不太好吧。
 
 #为什么选择moya：
+
    一开始网络框架的选型有Alamofire和Moya。
 
    Alamofire可以说是Swift版本的AFN，啃AFN的老啃了几年了，AFN的确博大精深，有很多值得开发者去学校的地方。但开发这么多年，AFN实在是啃不动了。试着封装了一下Alamofire。感觉和AFN封装大同小异。
@@ -145,7 +149,9 @@ so~ 下面开始对provider进行改造
 
 先看看最丰满的provider是什么样子的
 ![image.png](https://upload-images.jianshu.io/upload_images/1724449-848eb746a18c03a6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 当我看到这一个个扑朔迷离的参数时我的表情是这样的(⊙﹏⊙)b
+
 ![image.png](https://upload-images.jianshu.io/upload_images/1724449-08ec60bb78118fc9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 点进去看源码才发现Moya已经帮我们把每个参数都默认实现了一遍。***我们可以根据自己的设计需求设置参数***
@@ -157,7 +163,8 @@ so~ 下面开始对provider进行改造
 Moya官方不希望在所有的请求中统一添加参数，不过我们可以自己去定义endPointClosure实现相应的效果 
 详情参照：[Add additional parameters to all requests](https://github.com/Moya/Moya/issues/1482) 里面有具体的解决方案。
 
-#####根据实际项目需求去除了不太常用的***stubClosure***, ***callbackQueue***, ***trackInflights***后我的Provider长这样
+
+####根据实际项目需求去除了不太常用的***stubClosure***, ***callbackQueue***, ***trackInflights***后我的Provider长这样
 
 ```swift
 let Provider = MoyaProvider<API>(endpointClosure: myEndpointClosure, requestClosure: requestClosure, plugins: [networkPlugin], trackInflights: false)
@@ -264,7 +271,8 @@ let Provider = MoyaProvider<API>(endpointClosure: myEndpointClosure, requestClos
 ```
 
 
-####NetworkManager.swift 基本写完  还剩一点下面再说。
+
+###NetworkManager.swift 基本写完  还剩一点下面再说。
 这个时候我们的网络请求就会长这样：
 
 ```swift
@@ -282,11 +290,17 @@ let Provider = MoyaProvider<API>(endpointClosure: myEndpointClosure, requestClos
 ```
 
 
+
 ###像我这种懒得一比的开发者，当然不想每一次都写这么多result判断。写好多重复的代码。
+
 ![image.png](https://upload-images.jianshu.io/upload_images/1724449-d983e7464f41bf69.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 ###于是我决定再次封装。。。
+
 来来，我们再次回到NetworkManager.swift 封装provider请求。
+
 ##思路：
+
 1.后台返回错误的时候我统一把error msg显示给用户
 2.只有返回正确的时候才把数据提取出来进行解析。 对应的网络请求的hud全部封装到请求里面。
 
@@ -327,6 +341,7 @@ func NetWorkRequest(_ target: API, completion: @escaping successCallback ){
     }
 }
 ```
+
 ###MoyaConfig.swift 这个就是放一些公用字符串
  觉得麻烦可以放在NetworkManager.swift中  看个人爱好
 代码如下
