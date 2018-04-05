@@ -2,9 +2,8 @@
 
 看网上关于Moya的教程不太多，大多都是一样的，还有一些年久失修。这里专门讲讲关于moya的搭建及容易遇到的一些坑。
 
-![image](https://github.com/Moya/Moya/blob/master/web/logo_github.png)
 
-#重要的东西放到最前面
+##重要的东西放到最前面
 
 ####1.最好的教材是官方文档和Demo，Moya有[中文文档](https://github.com/Moya/Moya/tree/master/docs_CN)。
 
