@@ -1,22 +1,16 @@
-
-#重要的东西放到最前面
-
-
-####1.最好的教材是官方文档和Demo，Moya有[中文文档](https://github.com/Moya/Moya/tree/master/docs_CN)。
-
-
-####2.尝试一些不一样的东西会让开发更有趣。
-
-
-####3.写案例不给Demo不太好吧。
-
-
-
 踩坑踩了4天总算把基于Moya的网络框架搭建完毕
 
 看网上关于Moya的教程不太多，大多都是一样的，还有一些年久失修。这里专门讲讲关于moya的搭建及容易遇到的一些坑。
 
+![image](https://github.com/Moya/Moya/blob/master/web/logo_github.png)
 
+#重要的东西放到最前面
+
+####1.最好的教材是官方文档和Demo，Moya有[中文文档](https://github.com/Moya/Moya/tree/master/docs_CN)。
+
+####2.尝试一些不一样的东西会让开发更有趣。
+
+####3.写案例不给Demo不太好吧。
 
 
 #为什么选择moya：
