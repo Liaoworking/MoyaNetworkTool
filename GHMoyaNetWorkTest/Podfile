@@ -1,0 +1,6 @@
+platform :ios, “8.0”
+use_frameworks!
+target ‘GHMoyaNetWorkTest’ do
+pod 'Moya'
+pod 'SwiftyJSON'
+end
