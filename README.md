@@ -16,7 +16,7 @@
 
 
 
-#为什么选择moya：
+# 为什么选择moya：
 
    一开始网络框架的选型有Alamofire和Moya。
 
@@ -284,7 +284,7 @@ let Provider = MoyaProvider<API>(endpointClosure: myEndpointClosure, requestClos
 
 
 
-###NetworkManager.swift 基本写完  还剩一点下面再说。
+### NetworkManager.swift 基本写完  还剩一点下面再说。
 这个时候我们的网络请求就会长这样：
 
 ```swift
@@ -303,17 +303,18 @@ let Provider = MoyaProvider<API>(endpointClosure: myEndpointClosure, requestClos
 
 
 
-###像我这种懒得一比的开发者，当然不想每一次都写这么多result判断。写好多重复的代码。
+### 像我这种懒得一比的开发者，当然不想每一次都写这么多result判断。写好多重复的代码。
 
 ![image.png](https://upload-images.jianshu.io/upload_images/1724449-d983e7464f41bf69.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-###于是我决定再次封装。。。
+### 于是我决定再次封装。。。
 
 来来，我们再次回到NetworkManager.swift 封装provider请求。
 
-##思路：
+## 思路：
 
 1.后台返回错误的时候我统一把error msg显示给用户
+
 2.只有返回正确的时候才把数据提取出来进行解析。 对应的网络请求的hud全部封装到请求里面。
 
 这个是针对于大多数请求。个别展示效果不同的请求自己老老实实用provider.request写就行。
@@ -354,7 +355,7 @@ func NetWorkRequest(_ target: API, completion: @escaping successCallback ){
 }
 ```
 
-###MoyaConfig.swift 这个就是放一些公用字符串
+### MoyaConfig.swift 这个就是放一些公用字符串
  觉得麻烦可以放在NetworkManager.swift中  看个人爱好
 代码如下
 
