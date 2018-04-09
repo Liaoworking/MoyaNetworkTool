@@ -6,13 +6,13 @@
 看网上关于Moya的教程不太多，大多都是一样的，还有一些年久失修。这里专门讲讲关于moya的搭建及容易遇到的一些坑。
 
 
-***重要的东西放到最前面***
+# 重要的东西放到最前面
 
-1.最好的教材是官方文档和Demo，Moya有[中文文档](https://github.com/Moya/Moya/tree/master/docs_CN)。
+#### 1.最好的教材是官方文档和Demo，Moya有[中文文档](https://github.com/Moya/Moya/tree/master/docs_CN)。
 
-2.尝试一些不一样的东西会让开发更有趣。
+#### 2.尝试一些不一样的东西会让开发更有趣。
 
-3.写案例不给Demo不太好吧。
+#### 3.写案例不给Demo不太好吧。
 
 
 
@@ -22,7 +22,7 @@
 
    Alamofire可以说是Swift版本的AFN，啃AFN的老啃了几年了，AFN的确博大精深，有很多值得开发者去学校的地方。但开发这么多年，AFN实在是啃不动了。试着封装了一下Alamofire。感觉和AFN封装大同小异。
 
- 和技术群里的一些大佬讨论了一下,大多数也是推荐Moya，至于聊天记录里面提及的***包含?地址的问题***我们在稍后的内容里去解决。后来咬咬牙就决定使用Moya用新项目的网络框架。
+ 和技术群里的一些大佬讨论了一下,大多数也是推荐Moya，至于聊天记录里面提及的 ***包含?地址的问题*** 我们在稍后的内容里去解决。后来咬咬牙就决定使用Moya用新项目的网络框架。
 
 
 ![image](http://upload-images.jianshu.io/upload_images/1724449-6cbaec8a9dd62115?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -36,29 +36,29 @@
 # **Let's Begin**
 
 
-####**封装的目录结构**
+#### **封装的目录结构**
 
-安装好Moya后我们**创建好三个空的Swift文件**
+安装好Moya后我们 **创建好三个空的Swift文件** 
 
 ![image](http://upload-images.jianshu.io/upload_images/1724449-1632f5a42d3c9ea1?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 我们大致可将网络框架拆分成
 
-***API.swift***---将来我们的接口列表和不同的接口的一些配置在里面完成，最长打交道的地方。
+ ***API.swift*** ---将来我们的接口列表和不同的接口的一些配置在里面完成，最长打交道的地方。
 
-***NetworkManager.swift***---基本框架配置及封装写到这里
+ ***NetworkManager.swift*** ---基本框架配置及封装写到这里
 
-***MoyaConfig.swift***---这个其实可有可无的，习惯上把baseURL和一些公用字符串放进来
+ ***MoyaConfig.swift*** ---这个其实可有可无的，习惯上把baseURL和一些公用字符串放进来
 
 OK我们正式开始coding！
 
 API.swift中先创建一个API的枚举，枚举值是接口名， 并创建遵守TargetType协议的extention。
 
-这里我写三个测试的Api。第一个是无参，第二个是普通写法(我看官方文档好像是这种***多参数***都写进去的，实际开发过程中感觉有些麻烦)，第三个是直接把所有参数包装成字典传进来的文艺写法。。
+这里我写三个测试的Api。第一个是无参，第二个是普通写法(我看官方文档好像是这种 ***多参数*** 都写进去的，实际开发过程中感觉有些麻烦)，第三个是直接把所有参数包装成字典传进来的文艺写法。。
 
 ![image](http://upload-images.jianshu.io/upload_images/1724449-56416a46e74e8f54?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-直接点击**错误代码补全**即可自动补全所有的协议
+直接点击 **错误代码补全** 即可自动补全所有的协议
 
 ```swift
 import Foundation
@@ -133,7 +133,7 @@ extension API:TargetType{
 上面api.swift设置完毕
 
 
-###NetworkManager.swift
+### NetworkManager.swift
 
 下面就开始构建我们的请求相关的东西
 主要是完成对于Provider的完善及个性化设置。
@@ -153,7 +153,7 @@ extension API:TargetType{
         }
 ```
 
-当然，对应情况复杂的项目这个是***远远不够滴！***
+当然，对应情况复杂的项目这个是 ***远远不够滴！***
 
 so~ 下面开始对provider进行改造
 
@@ -167,7 +167,7 @@ so~ 下面开始对provider进行改造
 点进去看源码才发现Moya已经帮我们把每个参数都默认实现了一遍。***我们可以根据自己的设计需求设置参数***
 每个参数什么意思也不赘述了，[Moya 的初始化](https://www.jianshu.com/p/7286503db415)  这篇文章也都说了。
 
-####上文需要指正的地方是：
+#### 上文需要指正的地方是：
 
 ![image.png](https://upload-images.jianshu.io/upload_images/1724449-0f482299295f6d84.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
@@ -176,7 +176,7 @@ Moya官方不希望在所有的请求中统一添加参数，不过我们可以�
 详情参照：[Add additional parameters to all requests](https://github.com/Moya/Moya/issues/1482) 里面有具体的解决方案。
 
 
-####根据实际项目需求去除了不太常用的***stubClosure***, ***callbackQueue***, ***trackInflights***后我的Provider长这样
+#### 根据实际项目需求去除了不太常用的 ***stubClosure*** ,   ***callbackQueue*** ,  ***trackInflights*** 后我的Provider长这样
 
 ```swift
 let Provider = MoyaProvider<API>(endpointClosure: myEndpointClosure, requestClosure: requestClosure, plugins: [networkPlugin], trackInflights: false)
