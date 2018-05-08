@@ -12,6 +12,8 @@ import Moya
 enum API{
     case updateAPi(parameters:[String:Any])
     case register(email:String,password:String)
+    //上传用户头像
+    case uploadHeadImage(parameters: [String:Any],imageDate:Data)
     case easyRequset
 }
 
@@ -33,6 +35,8 @@ extension API:TargetType{
             return "4/news/latest"
         case .updateAPi:
             return "versionService.getAppUpdateApi"
+        case .uploadHeadImage( _):
+            return "/file/user/upload.jhtml"
         }
     }
     
@@ -61,6 +65,12 @@ extension API:TargetType{
             return .requestPlain
         case let .updateAPi(parameters):
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
+        //图片上传
+        case .uploadHeadImage(let parameters, let imageDate):
+            ///name 和fileName 看后台怎么说，   mineType根据文件类型上百度查对应的mineType
+            let formData = MultipartFormData(provider: .data(imageDate), name: "file",
+                                              fileName: "hangge.png", mimeType: "image/png")
+            return .uploadCompositeMultipart([formData], urlParameters: parameters)
         }
         //可选参数https://github.com/Moya/Moya/blob/master/docs_CN/Examples/OptionalParameters.md
 //        case .users(let limit):
