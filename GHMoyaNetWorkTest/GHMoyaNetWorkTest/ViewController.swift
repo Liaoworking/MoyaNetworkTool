@@ -13,8 +13,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         testZhiHuDailyAPI()
-//        testAPI()
+        
     }
 
     
@@ -52,6 +53,26 @@ class ViewController: UIViewController {
         let imageData = UIImageJPEGRepresentation(UIImage(), 0.3) //把图片转换成data
         NetWorkRequest(.uploadHeadImage(parameters: para, imageDate: imageData!)) { (resultString) -> (Void) in
             ///处理后台返回的json字符串
+        }
+    }
+    
+    
+    /// 需要获取到网络请求失败，错误数据的情况
+    func needsFailedAndErrorCondition() {
+        var paraDict: [String:Any] = Dictionary()
+        paraDict["app_type_"] = "1"
+        paraDict["app_version_no_"] = "1.0.1"
+        paraDict["platform_type_"] = "2"
+        paraDict["ver_code_value_"] = nil
+        NetWorkRequest(.updateAPi(parameters: paraDict), completion: { (resultString) -> (Void) in
+            print("网络成功的数据")
+        }, failed: { (str) -> (Void) in
+            print("网络请求失败的数据(resultCode不为正确时)")
+        /*
+             也可以把成功和失败写在一个闭包里，获取后统一处理，但大多请求下只需要处理成功的数据，用上面第一个方法就行,数据处理已经在基本方法中处理好了。这种情况用的地方不多。可以根据自己的实际需求改写这个框架
+         */
+        }) { () -> (Void) in
+            print("网络错误了")
         }
     }
     
