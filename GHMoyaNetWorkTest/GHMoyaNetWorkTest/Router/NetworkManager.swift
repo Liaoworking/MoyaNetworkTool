@@ -28,7 +28,7 @@ private let myEndpointClosure = { (target: API) -> Endpoint in
     var task = target.task
 
     /*
-     如果需要在每个请求中都添加类似token参数的参数请使用下面代码
+     如果需要在每个请求中都添加类似token参数的参数请取消注释下面代码
      👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇
      */
 //    let additionalParameters = ["token":"888888"]
@@ -46,7 +46,7 @@ private let myEndpointClosure = { (target: API) -> Endpoint in
 //    }
     /*
      👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆
-     如果需要在每个请求中都添加类似token参数的参数请使用上面代码
+     如果需要在每个请求中都添加类似token参数的参数请取消注释上面代码
      */
     
     
