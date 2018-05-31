@@ -14,8 +14,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        testZhiHuDailyAPI()
-        
+        testZhiHuDailyAPI()///演示moya+handyJSON的使用，个人感觉handyJSON转模型比swifterJSON方便很多
+        testAPI()//调用这个方法只是演示post请求 接口是调不通的
     }
 
     
@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         NetWorkRequest(.easyRequset) { (responseString) -> (Void) in
             if let daliyItems = [GHItem].deserialize(from: responseString, designatedPath: "stories") {
                 daliyItems.forEach({ (item) in
-                    print(item?.title ?? "模型无title")
+                    print("模型属性--\(item?.title ?? "模型无title")" )
                 })
             }
         }

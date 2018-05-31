@@ -25,11 +25,36 @@ typealias errorCallback = (() -> (Void))
 private let myEndpointClosure = { (target: API) -> Endpoint in
     ///这里把endpoint重新构造一遍主要为了解决网络请求地址里面含有? 时无法解析的bug https://github.com/Moya/Moya/issues/1198
     let url = target.baseURL.absoluteString + target.path
+    var task = target.task
+
+    /*
+     如果需要在每个请求中都添加类似token参数的参数请使用下面代码
+     👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇
+     */
+//    let additionalParameters = ["token":"888888"]
+//    let defaultEncoding = URLEncoding.default
+//    switch target.task {
+//        ///在你需要添加的请求方式中做修改就行，不用的case 可以删掉。。
+//        ///这里只是demo展示而已
+//    case .requestPlain:
+//        task = .requestParameters(parameters: additionalParameters, encoding: defaultEncoding)
+//    case .requestParameters(var parameters, let encoding):
+//        additionalParameters.forEach { parameters[$0.key] = $0.value }
+//        task = .requestParameters(parameters: parameters, encoding: encoding)
+//    default:
+//        break
+//    }
+    /*
+     👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆
+     如果需要在每个请求中都添加类似token参数的参数请使用上面代码
+     */
+    
+    
     var endpoint = Endpoint(
         url: url,
         sampleResponseClosure: { .networkResponse(200, target.sampleData) },
         method: target.method,
-        task: target.task,
+        task: task,
         httpHeaderFields: target.headers
     )
     requestTimeOut = 30//每次请求都会调用endpointClosure 到这里设置超时时长 也可单独每个接口设置
