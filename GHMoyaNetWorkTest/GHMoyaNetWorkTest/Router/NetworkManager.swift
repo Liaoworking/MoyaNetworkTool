@@ -35,7 +35,6 @@ private let myEndpointClosure = { (target: API) -> Endpoint in
 //    let defaultEncoding = URLEncoding.default
 //    switch target.task {
 //        ///在你需要添加的请求方式中做修改就行，不用的case 可以删掉。。
-//        ///这里只是demo展示而已
 //    case .requestPlain:
 //        task = .requestParameters(parameters: additionalParameters, encoding: defaultEncoding)
 //    case .requestParameters(var parameters, let encoding):
