@@ -8,38 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		06D393C240317DA9172EAA16 /* Pods_GHMoyaNetWorkTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B23A66C7079CAC3611D74EE /* Pods_GHMoyaNetWorkTest.framework */; };
-		246D43EE207250C7009D7A89 /* ReflectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43C9207250C7009D7A89 /* ReflectionHelper.swift */; };
-		246D43EF207250C7009D7A89 /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43CA207250C7009D7A89 /* Metadata.swift */; };
-		246D43F0207250C7009D7A89 /* CustomDateFormatTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43CB207250C7009D7A89 /* CustomDateFormatTransform.swift */; };
-		246D43F1207250C7009D7A89 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43CC207250C7009D7A89 /* Properties.swift */; };
-		246D43F2207250C7009D7A89 /* HexColorTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43CD207250C7009D7A89 /* HexColorTransform.swift */; };
-		246D43F3207250C7009D7A89 /* Transformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43CE207250C7009D7A89 /* Transformable.swift */; };
-		246D43F4207250C7009D7A89 /* NominalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43CF207250C7009D7A89 /* NominalType.swift */; };
-		246D43F5207250C7009D7A89 /* PointerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43D0207250C7009D7A89 /* PointerType.swift */; };
-		246D43F6207250C7009D7A89 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43D1207250C7009D7A89 /* Logger.swift */; };
-		246D43F9207250C7009D7A89 /* ExtendCustomModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43D4207250C7009D7A89 /* ExtendCustomModelType.swift */; };
-		246D43FA207250C7009D7A89 /* Measuable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43D5207250C7009D7A89 /* Measuable.swift */; };
-		246D43FB207250C7009D7A89 /* ISO8601DateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43D6207250C7009D7A89 /* ISO8601DateTransform.swift */; };
-		246D43FC207250C7009D7A89 /* Export.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43D7207250C7009D7A89 /* Export.swift */; };
-		246D43FD207250C7009D7A89 /* URLTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43D8207250C7009D7A89 /* URLTransform.swift */; };
-		246D43FE207250C7009D7A89 /* NSDecimalNumberTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43D9207250C7009D7A89 /* NSDecimalNumberTransform.swift */; };
-		246D43FF207250C7009D7A89 /* EnumTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43DA207250C7009D7A89 /* EnumTransform.swift */; };
-		246D4402207250C7009D7A89 /* BuiltInBasicType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43DD207250C7009D7A89 /* BuiltInBasicType.swift */; };
-		246D4403207250C7009D7A89 /* OtherExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43DE207250C7009D7A89 /* OtherExtension.swift */; };
-		246D4404207250C7009D7A89 /* Deserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43DF207250C7009D7A89 /* Deserializer.swift */; };
-		246D4405207250C7009D7A89 /* DataTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43E0207250C7009D7A89 /* DataTransform.swift */; };
-		246D4406207250C7009D7A89 /* BuiltInBridgeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43E1207250C7009D7A89 /* BuiltInBridgeType.swift */; };
-		246D4407207250C7009D7A89 /* HelpingMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43E2207250C7009D7A89 /* HelpingMapper.swift */; };
-		246D4408207250C7009D7A89 /* AnyExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43E3207250C7009D7A89 /* AnyExtensions.swift */; };
-		246D4409207250C7009D7A89 /* EnumType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43E4207250C7009D7A89 /* EnumType.swift */; };
-		246D440A207250C7009D7A89 /* TransformType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43E6207250C7009D7A89 /* TransformType.swift */; };
-		246D440B207250C7009D7A89 /* DateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43E7207250C7009D7A89 /* DateTransform.swift */; };
-		246D440C207250C7009D7A89 /* PropertyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43E8207250C7009D7A89 /* PropertyInfo.swift */; };
-		246D440D207250C7009D7A89 /* DateFormatterTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43E9207250C7009D7A89 /* DateFormatterTransform.swift */; };
-		246D440E207250C7009D7A89 /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43EA207250C7009D7A89 /* Serializer.swift */; };
-		246D440F207250C7009D7A89 /* ExtendCustomBasicType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43EB207250C7009D7A89 /* ExtendCustomBasicType.swift */; };
-		246D4410207250C7009D7A89 /* TransformOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43EC207250C7009D7A89 /* TransformOf.swift */; };
-		246D4411207250C7009D7A89 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D43ED207250C7009D7A89 /* Configuration.swift */; };
 		246D441320725185009D7A89 /* GHItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D441220725185009D7A89 /* GHItem.swift */; };
 		246D441520726DC9009D7A89 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D441420726DC9009D7A89 /* NetworkManager.swift */; };
 		246D441820734E82009D7A89 /* MoyaConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D441720734E82009D7A89 /* MoyaConfig.swift */; };
@@ -52,39 +20,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		246D43C9207250C7009D7A89 /* ReflectionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReflectionHelper.swift; sourceTree = "<group>"; };
-		246D43CA207250C7009D7A89 /* Metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metadata.swift; sourceTree = "<group>"; };
-		246D43CB207250C7009D7A89 /* CustomDateFormatTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDateFormatTransform.swift; sourceTree = "<group>"; };
-		246D43CC207250C7009D7A89 /* Properties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
-		246D43CD207250C7009D7A89 /* HexColorTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexColorTransform.swift; sourceTree = "<group>"; };
-		246D43CE207250C7009D7A89 /* Transformable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformable.swift; sourceTree = "<group>"; };
-		246D43CF207250C7009D7A89 /* NominalType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NominalType.swift; sourceTree = "<group>"; };
-		246D43D0207250C7009D7A89 /* PointerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointerType.swift; sourceTree = "<group>"; };
-		246D43D1207250C7009D7A89 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		246D43D4207250C7009D7A89 /* ExtendCustomModelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendCustomModelType.swift; sourceTree = "<group>"; };
-		246D43D5207250C7009D7A89 /* Measuable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Measuable.swift; sourceTree = "<group>"; };
-		246D43D6207250C7009D7A89 /* ISO8601DateTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISO8601DateTransform.swift; sourceTree = "<group>"; };
-		246D43D7207250C7009D7A89 /* Export.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Export.swift; sourceTree = "<group>"; };
-		246D43D8207250C7009D7A89 /* URLTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLTransform.swift; sourceTree = "<group>"; };
-		246D43D9207250C7009D7A89 /* NSDecimalNumberTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDecimalNumberTransform.swift; sourceTree = "<group>"; };
-		246D43DA207250C7009D7A89 /* EnumTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumTransform.swift; sourceTree = "<group>"; };
-		246D43DD207250C7009D7A89 /* BuiltInBasicType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuiltInBasicType.swift; sourceTree = "<group>"; };
-		246D43DE207250C7009D7A89 /* OtherExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherExtension.swift; sourceTree = "<group>"; };
-		246D43DF207250C7009D7A89 /* Deserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deserializer.swift; sourceTree = "<group>"; };
-		246D43E0207250C7009D7A89 /* DataTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTransform.swift; sourceTree = "<group>"; };
-		246D43E1207250C7009D7A89 /* BuiltInBridgeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuiltInBridgeType.swift; sourceTree = "<group>"; };
-		246D43E2207250C7009D7A89 /* HelpingMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpingMapper.swift; sourceTree = "<group>"; };
-		246D43E3207250C7009D7A89 /* AnyExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyExtensions.swift; sourceTree = "<group>"; };
-		246D43E4207250C7009D7A89 /* EnumType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumType.swift; sourceTree = "<group>"; };
-		246D43E5207250C7009D7A89 /* HandyJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandyJSON.h; sourceTree = "<group>"; };
-		246D43E6207250C7009D7A89 /* TransformType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformType.swift; sourceTree = "<group>"; };
-		246D43E7207250C7009D7A89 /* DateTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTransform.swift; sourceTree = "<group>"; };
-		246D43E8207250C7009D7A89 /* PropertyInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyInfo.swift; sourceTree = "<group>"; };
-		246D43E9207250C7009D7A89 /* DateFormatterTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatterTransform.swift; sourceTree = "<group>"; };
-		246D43EA207250C7009D7A89 /* Serializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializer.swift; sourceTree = "<group>"; };
-		246D43EB207250C7009D7A89 /* ExtendCustomBasicType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendCustomBasicType.swift; sourceTree = "<group>"; };
-		246D43EC207250C7009D7A89 /* TransformOf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformOf.swift; sourceTree = "<group>"; };
-		246D43ED207250C7009D7A89 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		246D441220725185009D7A89 /* GHItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GHItem.swift; sourceTree = "<group>"; };
 		246D441420726DC9009D7A89 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		246D441720734E82009D7A89 /* MoyaConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaConfig.swift; sourceTree = "<group>"; };
@@ -113,46 +48,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		246D43C8207250C7009D7A89 /* HandyJSON */ = {
-			isa = PBXGroup;
-			children = (
-				246D43C9207250C7009D7A89 /* ReflectionHelper.swift */,
-				246D43CA207250C7009D7A89 /* Metadata.swift */,
-				246D43CB207250C7009D7A89 /* CustomDateFormatTransform.swift */,
-				246D43CC207250C7009D7A89 /* Properties.swift */,
-				246D43CD207250C7009D7A89 /* HexColorTransform.swift */,
-				246D43CE207250C7009D7A89 /* Transformable.swift */,
-				246D43CF207250C7009D7A89 /* NominalType.swift */,
-				246D43D0207250C7009D7A89 /* PointerType.swift */,
-				246D43D1207250C7009D7A89 /* Logger.swift */,
-				246D43D4207250C7009D7A89 /* ExtendCustomModelType.swift */,
-				246D43D5207250C7009D7A89 /* Measuable.swift */,
-				246D43D6207250C7009D7A89 /* ISO8601DateTransform.swift */,
-				246D43D7207250C7009D7A89 /* Export.swift */,
-				246D43D8207250C7009D7A89 /* URLTransform.swift */,
-				246D43D9207250C7009D7A89 /* NSDecimalNumberTransform.swift */,
-				246D43DA207250C7009D7A89 /* EnumTransform.swift */,
-				246D43DD207250C7009D7A89 /* BuiltInBasicType.swift */,
-				246D43DE207250C7009D7A89 /* OtherExtension.swift */,
-				246D43DF207250C7009D7A89 /* Deserializer.swift */,
-				246D43E0207250C7009D7A89 /* DataTransform.swift */,
-				246D43E1207250C7009D7A89 /* BuiltInBridgeType.swift */,
-				246D43E2207250C7009D7A89 /* HelpingMapper.swift */,
-				246D43E3207250C7009D7A89 /* AnyExtensions.swift */,
-				246D43E4207250C7009D7A89 /* EnumType.swift */,
-				246D43E5207250C7009D7A89 /* HandyJSON.h */,
-				246D43E6207250C7009D7A89 /* TransformType.swift */,
-				246D43E7207250C7009D7A89 /* DateTransform.swift */,
-				246D43E8207250C7009D7A89 /* PropertyInfo.swift */,
-				246D43E9207250C7009D7A89 /* DateFormatterTransform.swift */,
-				246D43EA207250C7009D7A89 /* Serializer.swift */,
-				246D43EB207250C7009D7A89 /* ExtendCustomBasicType.swift */,
-				246D43EC207250C7009D7A89 /* TransformOf.swift */,
-				246D43ED207250C7009D7A89 /* Configuration.swift */,
-			);
-			path = HandyJSON;
-			sourceTree = "<group>";
-		};
 		246D441620734E56009D7A89 /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,7 +80,6 @@
 			isa = PBXGroup;
 			children = (
 				246D441620734E56009D7A89 /* Router */,
-				246D43C8207250C7009D7A89 /* HandyJSON */,
 				24817481206E171300285D43 /* AppDelegate.swift */,
 				246D441220725185009D7A89 /* GHItem.swift */,
 				24817483206E171300285D43 /* ViewController.swift */,
@@ -311,6 +205,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-GHMoyaNetWorkTest/Pods-GHMoyaNetWorkTest-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -318,6 +213,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HandyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -349,44 +245,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				246D4404207250C7009D7A89 /* Deserializer.swift in Sources */,
-				246D4407207250C7009D7A89 /* HelpingMapper.swift in Sources */,
-				246D440C207250C7009D7A89 /* PropertyInfo.swift in Sources */,
-				246D440F207250C7009D7A89 /* ExtendCustomBasicType.swift in Sources */,
-				246D43FB207250C7009D7A89 /* ISO8601DateTransform.swift in Sources */,
-				246D43F4207250C7009D7A89 /* NominalType.swift in Sources */,
-				246D440E207250C7009D7A89 /* Serializer.swift in Sources */,
 				246D441820734E82009D7A89 /* MoyaConfig.swift in Sources */,
-				246D43F0207250C7009D7A89 /* CustomDateFormatTransform.swift in Sources */,
-				246D43EE207250C7009D7A89 /* ReflectionHelper.swift in Sources */,
-				246D43FA207250C7009D7A89 /* Measuable.swift in Sources */,
-				246D43F2207250C7009D7A89 /* HexColorTransform.swift in Sources */,
 				24817484206E171300285D43 /* ViewController.swift in Sources */,
-				246D4406207250C7009D7A89 /* BuiltInBridgeType.swift in Sources */,
-				246D43EF207250C7009D7A89 /* Metadata.swift in Sources */,
-				246D4402207250C7009D7A89 /* BuiltInBasicType.swift in Sources */,
-				246D4408207250C7009D7A89 /* AnyExtensions.swift in Sources */,
-				246D4411207250C7009D7A89 /* Configuration.swift in Sources */,
 				24817494206E375700285D43 /* API.swift in Sources */,
-				246D4410207250C7009D7A89 /* TransformOf.swift in Sources */,
 				246D441520726DC9009D7A89 /* NetworkManager.swift in Sources */,
-				246D43FC207250C7009D7A89 /* Export.swift in Sources */,
-				246D43FF207250C7009D7A89 /* EnumTransform.swift in Sources */,
-				246D43F6207250C7009D7A89 /* Logger.swift in Sources */,
-				246D43FD207250C7009D7A89 /* URLTransform.swift in Sources */,
-				246D440D207250C7009D7A89 /* DateFormatterTransform.swift in Sources */,
-				246D440B207250C7009D7A89 /* DateTransform.swift in Sources */,
 				246D441320725185009D7A89 /* GHItem.swift in Sources */,
-				246D4403207250C7009D7A89 /* OtherExtension.swift in Sources */,
-				246D43F5207250C7009D7A89 /* PointerType.swift in Sources */,
 				24817482206E171300285D43 /* AppDelegate.swift in Sources */,
-				246D43F3207250C7009D7A89 /* Transformable.swift in Sources */,
-				246D43F1207250C7009D7A89 /* Properties.swift in Sources */,
-				246D43FE207250C7009D7A89 /* NSDecimalNumberTransform.swift in Sources */,
-				246D440A207250C7009D7A89 /* TransformType.swift in Sources */,
-				246D43F9207250C7009D7A89 /* ExtendCustomModelType.swift in Sources */,
-				246D4405207250C7009D7A89 /* DataTransform.swift in Sources */,
-				246D4409207250C7009D7A89 /* EnumType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,7 +393,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AZBQAW5AXD;
+				DEVELOPMENT_TEAM = YG9MC8D2BK;
 				INFOPLIST_FILE = GHMoyaNetWorkTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -546,7 +410,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AZBQAW5AXD;
+				DEVELOPMENT_TEAM = YG9MC8D2BK;
 				INFOPLIST_FILE = GHMoyaNetWorkTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

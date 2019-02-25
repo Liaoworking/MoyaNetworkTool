@@ -10,7 +10,6 @@ import Foundation
 import Moya
 import Alamofire
 import SwiftyJSON
-
 /// 超时时长
 private var requestTimeOut:Double = 30
 ///成功数据的回调

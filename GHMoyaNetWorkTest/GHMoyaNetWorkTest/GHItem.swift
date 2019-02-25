@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import HandyJSON
 class GHItem: HandyJSON{
 	var title:  String?
 	var ga_prefix: String?
