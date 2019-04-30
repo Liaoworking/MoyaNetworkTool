@@ -120,7 +120,6 @@
 				2481747B206E171300285D43 /* Frameworks */,
 				2481747C206E171300285D43 /* Resources */,
 				81D9674D059067D012BB6EB7 /* [CP] Embed Pods Frameworks */,
-				ADE593FA559F0BAE1ED1948E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -203,7 +202,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-GHMoyaNetWorkTest/Pods-GHMoyaNetWorkTest-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-GHMoyaNetWorkTest/Pods-GHMoyaNetWorkTest-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
@@ -220,22 +219,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GHMoyaNetWorkTest/Pods-GHMoyaNetWorkTest-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		ADE593FA559F0BAE1ED1948E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GHMoyaNetWorkTest/Pods-GHMoyaNetWorkTest-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GHMoyaNetWorkTest/Pods-GHMoyaNetWorkTest-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

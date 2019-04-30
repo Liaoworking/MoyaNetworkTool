@@ -3,5 +3,5 @@ use_frameworks!
 target ‘GHMoyaNetWorkTest’ do
 pod 'Moya'
 pod 'SwiftyJSON'
-pod 'HandyJSON', '~> 4.2.0'
+pod 'HandyJSON', '~> 5.0.0-beta.1'
 end
