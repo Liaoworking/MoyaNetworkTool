@@ -9,7 +9,7 @@
 import Foundation
 import Moya
 import SwiftyJSON
-
+// 把不同的业务逻辑拆开管理
 class APIProvider: MoyaProvider<API> {
     override init(endpointClosure: @escaping MoyaProvider<Target>.EndpointClosure = MoyaProvider<Target>.defaultEndpointMapping,
                   requestClosure: @escaping MoyaProvider<Target>.RequestClosure = MoyaProvider<Target>.defaultRequestMapping,
@@ -32,9 +32,7 @@ class APIProvider: MoyaProvider<API> {
 let provider = APIProvider()
 
 
-/// 如有以后增加了一个借口很多新的模块，例如朋友圈模块 我们可以重新创建一个TargetType 来单独做处理
-
-
+/// 如有以后增加了一个接口很多新的模块，例如朋友圈模块 我们可以重新创建一个MomentsAPI.swfit来单独做处理。
 
 // 具体使用如下 使用方法同NetworkManager.swift文件中的封装
 
