@@ -138,17 +138,17 @@ let Provider = MoyaProvider<API>(endpointClosure: myEndpointClosure, requestClos
 
 
 
-/// 最常用的网络请求，只需知道正确的结果无需其他操作时候用这个
+/// 最常用的网络请求，只需知道正确的结果无需其他操作时候用这个 (可以给调用的NetWorkReques方法的写参数默认值达到一样的效果,这里为解释方便做抽出来二次封装)
 ///
 /// - Parameters:
 ///   - target: 网络请求
 ///   - completion: 请求成功的回调
-func NetWorkRequest(_ target: API, completion: @escaping successCallback ){
+func NetWorkRequest(_ target: API, completion: @escaping successCallback){
     NetWorkRequest(target, completion: completion, failed: nil, errorResult: nil)
 }
 
 
-/// 需要知道成功或者失败的网络请求， 要知道code码为其他情况时候用这个
+/// 需要知道成功或者失败的网络请求， 要知道code码为其他情况时候用这个 (可以给调用的NetWorkRequest方法的参数默认值达到一样的效果,这里为解释方便做抽出来二次封装)
 ///
 /// - Parameters:
 ///   - target: 网络请求
@@ -166,14 +166,15 @@ func NetWorkRequest(_ target: API, completion: @escaping successCallback , faile
 ///   - completion: 成功
 ///   - failed: 失败
 ///   - error: 错误
-func NetWorkRequest(_ target: API, completion: @escaping successCallback , failed:failedCallback?, errorResult:errorCallback?) {
+@discardableResult //当我们需要主动取消网络请求的时候可以用返回值Cancellable, 一般不用的话做忽略处理
+func NetWorkRequest(_ target: API, completion: @escaping successCallback , failed:failedCallback?, errorResult:errorCallback?) -> Cancellable? {
     //先判断网络是否有链接 没有的话直接返回--代码略
     if !isNetworkConnect{
         print("提示用户网络似乎出现了问题")
-        return
+        return nil
     }
     //这里显示loading图
-    Provider.request(target) { (result) in
+    return Provider.request(target) { (result) in
         //隐藏hud
         switch result {
         case let .success(response):
@@ -189,22 +190,15 @@ func NetWorkRequest(_ target: API, completion: @escaping successCallback , faile
 //                if jsonData[RESULT_CODE].stringValue == "1000"{
 //                    completion(String(data: response.data, encoding: String.Encoding.utf8)!)
 //                }else{
-//                if failed != nil{
-//                    failed(String(data: response.data, encoding: String.Encoding.utf8)!)
-//                }
+//                    failed?(String(data: response.data, encoding: String.Encoding.utf8)!)
 //                }
                 
             } catch {
             }
         case let .failure(error):
-            guard let error = error as? CustomStringConvertible else {
                 //网络连接失败，提示用户
-                print("网络连接失败")
-                break
-            }
-            if errorResult != nil {
-                errorResult!()
-            }
+                print("网络连接失败\(error)")
+                errorResult?()
         }
     }
 }
