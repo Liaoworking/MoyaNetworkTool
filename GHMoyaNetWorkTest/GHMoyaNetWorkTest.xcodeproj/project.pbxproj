@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		06D393C240317DA9172EAA16 /* Pods_GHMoyaNetWorkTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B23A66C7079CAC3611D74EE /* Pods_GHMoyaNetWorkTest.framework */; };
+		213A44E0238A651800E41B05 /* APIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213A44DF238A651800E41B05 /* APIProvider.swift */; };
+		213A44E2238A673400E41B05 /* MomentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213A44E1238A673400E41B05 /* MomentsAPI.swift */; };
+		213A44E4238A684D00E41B05 /* MomentsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213A44E3238A684D00E41B05 /* MomentsProvider.swift */; };
 		246D441320725185009D7A89 /* GHItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D441220725185009D7A89 /* GHItem.swift */; };
 		246D441520726DC9009D7A89 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D441420726DC9009D7A89 /* NetworkManager.swift */; };
 		246D441820734E82009D7A89 /* MoyaConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246D441720734E82009D7A89 /* MoyaConfig.swift */; };
@@ -20,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		213A44DF238A651800E41B05 /* APIProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProvider.swift; sourceTree = "<group>"; };
+		213A44E1238A673400E41B05 /* MomentsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentsAPI.swift; sourceTree = "<group>"; };
+		213A44E3238A684D00E41B05 /* MomentsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentsProvider.swift; sourceTree = "<group>"; };
 		246D441220725185009D7A89 /* GHItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GHItem.swift; sourceTree = "<group>"; };
 		246D441420726DC9009D7A89 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		246D441720734E82009D7A89 /* MoyaConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaConfig.swift; sourceTree = "<group>"; };
@@ -48,14 +54,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		246D441620734E56009D7A89 /* Router */ = {
+		213A44DE238A650B00E41B05 /* Router2(另外一种封装思路) */ = {
+			isa = PBXGroup;
+			children = (
+				213A44DF238A651800E41B05 /* APIProvider.swift */,
+				213A44E1238A673400E41B05 /* MomentsAPI.swift */,
+				213A44E3238A684D00E41B05 /* MomentsProvider.swift */,
+			);
+			path = "Router2(另外一种封装思路)";
+			sourceTree = "<group>";
+		};
+		246D441620734E56009D7A89 /* Router(懒人版) */ = {
 			isa = PBXGroup;
 			children = (
 				24817493206E375700285D43 /* API.swift */,
 				246D441420726DC9009D7A89 /* NetworkManager.swift */,
 				246D441720734E82009D7A89 /* MoyaConfig.swift */,
 			);
-			path = Router;
+			path = "Router(懒人版)";
 			sourceTree = "<group>";
 		};
 		24817475206E171200285D43 = {
@@ -79,7 +95,8 @@
 		24817480206E171300285D43 /* GHMoyaNetWorkTest */ = {
 			isa = PBXGroup;
 			children = (
-				246D441620734E56009D7A89 /* Router */,
+				213A44DE238A650B00E41B05 /* Router2(另外一种封装思路) */,
+				246D441620734E56009D7A89 /* Router(懒人版) */,
 				24817481206E171300285D43 /* AppDelegate.swift */,
 				246D441220725185009D7A89 /* GHItem.swift */,
 				24817483206E171300285D43 /* ViewController.swift */,
@@ -229,9 +246,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				213A44E2238A673400E41B05 /* MomentsAPI.swift in Sources */,
 				246D441820734E82009D7A89 /* MoyaConfig.swift in Sources */,
 				24817484206E171300285D43 /* ViewController.swift in Sources */,
+				213A44E0238A651800E41B05 /* APIProvider.swift in Sources */,
 				24817494206E375700285D43 /* API.swift in Sources */,
+				213A44E4238A684D00E41B05 /* MomentsProvider.swift in Sources */,
 				246D441520726DC9009D7A89 /* NetworkManager.swift in Sources */,
 				246D441320725185009D7A89 /* GHItem.swift in Sources */,
 				24817482206E171300285D43 /* AppDelegate.swift in Sources */,

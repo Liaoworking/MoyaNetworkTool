@@ -117,7 +117,6 @@ let policies: [String: ServerTrustPolicy] = [
 /// NetworkActivityPlugin插件用来监听网络请求，界面上做相应的展示
 ///但这里我没怎么用这个。。。 loading的逻辑直接放在网络处理里面了
 private let networkPlugin = NetworkActivityPlugin.init { (changeType, targetType) in
-
     print("networkPlugin \(changeType)")
     //targetType 是当前请求的基本信息
     switch(changeType){
@@ -184,21 +183,21 @@ func NetWorkRequest(_ target: API, completion: @escaping successCallback , faile
                 //               这里的completion和failed判断条件依据不同项目来做，为演示demo我把判断条件注释了，直接返回completion。
                 
                 completion(String(data: response.data, encoding: String.Encoding.utf8)!)
-
+                
                 print("flag不为1000 HUD显示后台返回message"+"\(jsonData[RESULT_MESSAGE].stringValue)")
                 
-//                if jsonData[RESULT_CODE].stringValue == "1000"{
-//                    completion(String(data: response.data, encoding: String.Encoding.utf8)!)
-//                }else{
-//                    failed?(String(data: response.data, encoding: String.Encoding.utf8)!)
-//                }
+                //                if jsonData[RESULT_CODE].stringValue == "1000"{
+                //                    completion(String(data: response.data, encoding: String.Encoding.utf8)!)
+                //                }else{
+                //                    failed?(String(data: response.data, encoding: String.Encoding.utf8)!)
+                //                }
                 
             } catch {
             }
         case let .failure(error):
-                //网络连接失败，提示用户
-                print("网络连接失败\(error)")
-                errorResult?()
+            //网络连接失败，提示用户
+            print("网络连接失败\(error)")
+            errorResult?()
         }
     }
 }
