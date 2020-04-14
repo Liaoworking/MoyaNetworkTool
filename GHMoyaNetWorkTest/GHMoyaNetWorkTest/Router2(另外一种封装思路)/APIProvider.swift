@@ -15,7 +15,7 @@ class APIProvider: MoyaProvider<API> {
                   requestClosure: @escaping MoyaProvider<Target>.RequestClosure = MoyaProvider<Target>.defaultRequestMapping,
                   stubClosure: @escaping MoyaProvider<Target>.StubClosure = MoyaProvider<Target>.neverStub,
                   callbackQueue: DispatchQueue? = nil,
-                  manager: Manager = MoyaProvider<Target>.defaultAlamofireManager(),
+                  session: Session = MoyaProvider<Target>.defaultAlamofireSession(),
                   plugins: [PluginType] = [],
                   trackInflights: Bool = false) {
 
@@ -23,7 +23,7 @@ class APIProvider: MoyaProvider<API> {
                    requestClosure: requestClosure,
                    stubClosure: stubClosure,
                    callbackQueue: callbackQueue,
-                   manager: manager,
+                   session: session,
                    plugins: plugins,
                    trackInflights: trackInflights)
     }

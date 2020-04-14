@@ -1,7 +1,8 @@
-platform :ios, “8.0”
+source "https://github.com/CocoaPods/Specs.git"
+
+platform :ios, “13.0”
 use_frameworks!
 target ‘GHMoyaNetWorkTest’ do
-pod 'Moya'
+pod 'Moya', '~> 14.0'
 pod 'SwiftyJSON'
-pod 'HandyJSON', '~> 5.0.0-beta.1'
-end
+pod 'HandyJSON', '~> 5.0.2-beta'end
