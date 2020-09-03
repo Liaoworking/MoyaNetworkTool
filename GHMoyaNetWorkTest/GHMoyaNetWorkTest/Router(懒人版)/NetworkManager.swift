@@ -8,7 +8,7 @@
 
 import Alamofire
 import Foundation
-import HandyJSON
+import ObjectMapper
 import Moya
 import SwiftyJSON
 /// 超时时长
@@ -213,7 +213,7 @@ typealias RequestFailureCallback = ((_ code: Int?, _ message: String?) -> Void)
 ///   - failureCallback: 网络请求失败的回调
 /// - Returns: 可取消网络请求的实例
 @discardableResult
-func NetWorkRequest<T: HandyJSON>(_ target: API, isHideFailAlert: Bool = false, modelType: T.Type?, successCallback: RequestSuccessCallback?, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
+func NetWorkRequest<T: Mappable>(_ target: API, isHideFailAlert: Bool = false, modelType: T.Type?, successCallback: RequestSuccessCallback?, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
     // 这里显示loading图
     return Provider.request(target) { result in
         // 隐藏hud
@@ -228,13 +228,13 @@ func NetWorkRequest<T: HandyJSON>(_ target: API, isHideFailAlert: Bool = false, 
                 }
 
                 if jsonData["data"].dictionaryObject != nil { // 字典转model
-                    if let model = T.deserialize(from: String(data: response.data, encoding: String.Encoding.utf8)!, designatedPath: "data") {
+                    if let model = T(JSONString: jsonData["data"].rawString() ?? "") {
                         successCallback?(model, jsonData["message"].stringValue, String(data: response.data, encoding: String.Encoding.utf8)!)
                     } else {
                         failureCallback?(jsonData["data"].intValue, "解析失败")
                     }
                 } else if jsonData["data"].arrayObject != nil { // 数组转model
-                    if let model = [T].deserialize(from: String(data: response.data, encoding: String.Encoding.utf8)!, designatedPath: "data") {
+                    if let model = [T](JSONString: jsonData["data"].rawString() ?? "") {
                         successCallback?(model, jsonData["message"].stringValue, String(data: response.data, encoding: String.Encoding.utf8)!)
                     } else {
                         failureCallback?(jsonData["data"].intValue, "解析失败")

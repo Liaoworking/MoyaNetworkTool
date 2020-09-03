@@ -7,8 +7,34 @@
 //
 
 import Foundation
-import HandyJSON
-class GHItem: HandyJSON{
+import ObjectMapper
+
+
+class GHZhihuModel: Mappable {
+    required init?(map: Map) { }
+    
+    var stories:[GHItem]?
+
+    
+    func mapping(map: Map) {
+        stories <- map["stories"]
+    }
+    
+    
+}
+
+class GHItem: Mappable{
+    required init?(map: Map) {}
+    
+    func mapping(map: Map) {
+        title <- map["title"]
+        ga_prefix <- map["ga_prefix"]
+        images <- map["images"]
+        multipic <- map["multipic"]
+        type <- map["type"]
+        id <- map["id"]
+    }
+    
 	var title:  String?
 	var ga_prefix: String?
 	var images: String?
@@ -16,6 +42,6 @@ class GHItem: HandyJSON{
 	var type: Int?
 	var id: Int?
     
-    //用HandyJSON必须要实现这个方法
-	required init() {}
+    
+    
 }

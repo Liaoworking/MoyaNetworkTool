@@ -1,9 +1,9 @@
 ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire" "${PODS_CONFIGURATION_BUILD_DIR}/HandyJSON" "${PODS_CONFIGURATION_BUILD_DIR}/Moya" "${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire" "${PODS_CONFIGURATION_BUILD_DIR}/Moya" "${PODS_CONFIGURATION_BUILD_DIR}/ObjectMapper" "${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/HandyJSON/HandyJSON.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/Moya/Moya.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON/SwiftyJSON.framework/Headers"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/Moya/Moya.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/ObjectMapper/ObjectMapper.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON/SwiftyJSON.framework/Headers"
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_LDFLAGS = $(inherited) -framework "Alamofire" -framework "CFNetwork" -framework "Foundation" -framework "HandyJSON" -framework "Moya" -framework "SwiftyJSON"
+OTHER_LDFLAGS = $(inherited) -framework "Alamofire" -framework "CFNetwork" -framework "Foundation" -framework "Moya" -framework "ObjectMapper" -framework "SwiftyJSON"
 OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)

@@ -26,3 +26,5 @@ DerivedData
 *.xcworkspace
 *.lock
 Pods/
+OutPuts/
+fastlane/report.xml

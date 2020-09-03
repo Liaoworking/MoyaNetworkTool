@@ -29,9 +29,11 @@ class ViewController: UIViewController {
     
     func testZhiHuDailyAPI() {
         cancelableRequest = NetWorkRequest(.easyRequset, completion: { (responseString) -> (Void) in
-        if let daliyItems = [GHItem].deserialize(from: responseString, designatedPath: "stories") {
-            daliyItems.forEach({ (item) in
-                print("模型属性--\(item?.title ?? "模型无title")" )
+            // DEMO中ObjectMapper转模型只是做一个演示，具体封装和用法可以参照
+            // https://github.com/tristanhimmelman/ObjectMapper
+            if let zhihuModel = GHZhihuModel(JSONString: responseString) {
+                zhihuModel.stories?.forEach({ (item) in
+                    print("模型属性--\(item.title ?? "模型无title")" )
             })
         }
         }, failed: { (failedResutl) -> (Void) in
