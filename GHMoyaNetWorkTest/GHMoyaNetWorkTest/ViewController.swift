@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         
         testZhiHuDailyAPI()///演示moya+ObjectMapper
         testAPI()//调用这个方法只是演示post请求 接口是调不通的
-        multiServiceModule() // 多业务场景使用的DEMO
+        multiServiceModule() // 多业务模块使用
     }
 
     override func viewDidDisappear(_ animated: Bool) {

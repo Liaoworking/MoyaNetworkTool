@@ -14,13 +14,10 @@ class GHZhihuModel: Mappable {
     required init?(map: Map) { }
     
     var stories:[GHItem]?
-
     
     func mapping(map: Map) {
         stories <- map["stories"]
     }
-    
-    
 }
 
 class GHItem: Mappable{
@@ -41,7 +38,4 @@ class GHItem: Mappable{
 	var multipic: String?
 	var type: Int?
 	var id: Int?
-    
-    
-    
 }
