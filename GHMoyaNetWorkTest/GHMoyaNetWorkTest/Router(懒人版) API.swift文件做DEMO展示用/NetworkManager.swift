@@ -21,7 +21,7 @@ typealias failedCallback = ((String) -> Void)
 typealias errorCallback = (() -> Void)
 
 /// 网络请求的基本设置,这里可以拿到是具体的哪个网络请求，可以在这里做一些设置
-private let myEndpointClosure = { (target: API) -> Endpoint in
+private let myEndpointClosure = { (target: TargetType) -> Endpoint in
     /// 这里把endpoint重新构造一遍主要为了解决网络请求地址里面含有? 时无法解析的bug https://github.com/Moya/Moya/issues/1198
     let url = target.baseURL.absoluteString + target.path
     var task = target.task
@@ -55,16 +55,21 @@ private let myEndpointClosure = { (target: API) -> Endpoint in
         httpHeaderFields: target.headers
     )
     requestTimeOut = 30 // 每次请求都会调用endpointClosure 到这里设置超时时长 也可单独每个接口设置
-    switch target {
-    case .easyRequset:
-        return endpoint
-    case .register:
-        requestTimeOut = 5
-        return endpoint
+    // 针对于某个具体的业务模块来做接口配置
+    if let apiTarget = target as? API {
+        switch apiTarget {
+        case .easyRequset:
+            return endpoint
+        case .register:
+            requestTimeOut = 5
+            return endpoint
 
-    default:
-        return endpoint
+        default:
+            return endpoint
+        }
     }
+    
+    return endpoint
 }
 
 /// 网络请求的设置
@@ -130,14 +135,14 @@ private let networkPlugin = NetworkActivityPlugin.init { changeType, _ in
 // stubClosure   用来延时发送网络请求
 
 /// /网络请求发送的核心初始化方法，创建网络请求对象
-let Provider = MoyaProvider<API>(endpointClosure: myEndpointClosure, requestClosure: requestClosure, plugins: [networkPlugin], trackInflights: false)
+let Provider = MoyaProvider<MultiTarget>(endpointClosure: myEndpointClosure, requestClosure: requestClosure, plugins: [networkPlugin], trackInflights: false)
 
 /// 最常用的网络请求，只需知道正确的结果无需其他操作时候用这个 (可以给调用的NetWorkReques方法的写参数默认值达到一样的效果,这里为解释方便做抽出来二次封装)
 ///
 /// - Parameters:
 ///   - target: 网络请求
 ///   - completion: 请求成功的回调
-func NetWorkRequest(_ target: API, completion: @escaping successCallback) {
+func NetWorkRequest(_ target: TargetType, completion: @escaping successCallback) {
     NetWorkRequest(target, completion: completion, failed: nil, errorResult: nil)
 }
 
@@ -147,7 +152,7 @@ func NetWorkRequest(_ target: API, completion: @escaping successCallback) {
 ///   - target: 网络请求
 ///   - completion: 成功的回调
 ///   - failed: 请求失败的回调
-func NetWorkRequest(_ target: API, completion: @escaping successCallback, failed: failedCallback?) {
+func NetWorkRequest(_ target: TargetType, completion: @escaping successCallback, failed: failedCallback?) {
     NetWorkRequest(target, completion: completion, failed: failed, errorResult: nil)
 }
 
@@ -159,14 +164,14 @@ func NetWorkRequest(_ target: API, completion: @escaping successCallback, failed
 ///   - failed: 失败
 ///   - error: 错误
 @discardableResult // 当我们需要主动取消网络请求的时候可以用返回值Cancellable, 一般不用的话做忽略处理
-func NetWorkRequest(_ target: API, completion: @escaping successCallback, failed: failedCallback?, errorResult: errorCallback?) -> Cancellable? {
+func NetWorkRequest(_ target: TargetType, completion: @escaping successCallback, failed: failedCallback?, errorResult: errorCallback?) -> Cancellable? {
     // 先判断网络是否有链接 没有的话直接返回--代码略
     if !UIDevice.isNetworkConnect {
         print("提示用户网络似乎出现了问题")
         return nil
     }
     // 这里显示loading图
-    return Provider.request(target) { result in
+    return Provider.request(MultiTarget(target)) { result in
         // 隐藏hud
         switch result {
         case let .success(response):
@@ -213,9 +218,9 @@ typealias RequestFailureCallback = ((_ code: Int?, _ message: String?) -> Void)
 ///   - failureCallback: 网络请求失败的回调
 /// - Returns: 可取消网络请求的实例
 @discardableResult
-func NetWorkRequest<T: Mappable>(_ target: API, isHideFailAlert: Bool = false, modelType: T.Type?, successCallback: RequestSuccessCallback?, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
+func NetWorkRequest<T: Mappable>(_ target: TargetType, isHideFailAlert: Bool = false, modelType: T.Type?, successCallback: RequestSuccessCallback?, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
     // 这里显示loading图
-    return Provider.request(target) { result in
+    return Provider.request(MultiTarget(target)) { result in
         // 隐藏hud
         switch result {
         case let .success(response):

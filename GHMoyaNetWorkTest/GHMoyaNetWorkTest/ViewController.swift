@@ -17,8 +17,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        testZhiHuDailyAPI()///演示moya+handyJSON的使用，个人感觉handyJSON转模型比swifterJSON方便很多
+        testZhiHuDailyAPI()///演示moya+ObjectMapper
         testAPI()//调用这个方法只是演示post请求 接口是调不通的
+        multiServiceModule() // 多业务场景使用的DEMO
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -28,7 +29,7 @@ class ViewController: UIViewController {
     }
     
     func testZhiHuDailyAPI() {
-        cancelableRequest = NetWorkRequest(.easyRequset, completion: { (responseString) -> (Void) in
+        cancelableRequest = NetWorkRequest(API.easyRequset, completion: { (responseString) -> (Void) in
             // DEMO中ObjectMapper转模型只是做一个演示，具体封装和用法可以参照
             // https://github.com/tristanhimmelman/ObjectMapper
             if let zhihuModel = GHZhihuModel(JSONString: responseString) {
@@ -51,7 +52,7 @@ class ViewController: UIViewController {
         paraDict["app_version_no_"] = "1.0.1"
         paraDict["platform_type_"] = "2"
         paraDict["ver_code_value_"] = nil
-        NetWorkRequest(.updateAPi(parameters: paraDict)) { (responseString) -> (Void) in
+        NetWorkRequest(API.updateAPi(parameters: paraDict)) { (responseString) -> (Void) in
             //后台flag为1000是后台的result code
             print(responseString)
         }
@@ -65,10 +66,30 @@ class ViewController: UIViewController {
         para["file_type_"] = "head"
         
         let imageData = UIImageJPEGRepresentation(UIImage(), 0.3) //把图片转换成data
-        NetWorkRequest(.uploadHeadImage(parameters: para, imageDate: imageData!)) { (resultString) -> (Void) in
+        NetWorkRequest(API.uploadHeadImage(parameters: para, imageDate: imageData!)) { (resultString) -> (Void) in
             ///处理后台返回的json字符串
         }
     }
+    
+    
+    /// 多业务模块时候的网络请求
+    func multiServiceModule() {
+        // 登录模块的网络请求
+        NetWorkRequest(APILogin.login) { (resultString) in
+            // do something here
+        }
+        
+        // 用户信息获取
+        NetWorkRequest(APIUser.getInfo) { (resultString) in
+            // do something here
+        }
+        // 商品列表获取
+        NetWorkRequest(APIShops.getGoods) { (resultString) in
+            // do something here
+        }
+        
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

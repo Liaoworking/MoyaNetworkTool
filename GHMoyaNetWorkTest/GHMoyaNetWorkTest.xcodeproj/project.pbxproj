@@ -20,6 +20,9 @@
 		24817489206E171300285D43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24817488206E171300285D43 /* Assets.xcassets */; };
 		2481748C206E171300285D43 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2481748A206E171300285D43 /* LaunchScreen.storyboard */; };
 		24817494206E375700285D43 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24817493206E375700285D43 /* API.swift */; };
+		D522A9C7251345240041684C /* APILogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D522A9C6251345240041684C /* APILogin.swift */; };
+		D522A9C9251345340041684C /* APIUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D522A9C8251345340041684C /* APIUser.swift */; };
+		D522A9CB251345930041684C /* APIShops.swift in Sources */ = {isa = PBXBuildFile; fileRef = D522A9CA251345930041684C /* APIShops.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,9 @@
 		32B58BA1D36A949646522BD5 /* Pods-GHMoyaNetWorkTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GHMoyaNetWorkTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GHMoyaNetWorkTest/Pods-GHMoyaNetWorkTest.debug.xcconfig"; sourceTree = "<group>"; };
 		3608A9B2F8A8E39614C14E3D /* Pods-GHMoyaNetWorkTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GHMoyaNetWorkTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-GHMoyaNetWorkTest/Pods-GHMoyaNetWorkTest.release.xcconfig"; sourceTree = "<group>"; };
 		5B23A66C7079CAC3611D74EE /* Pods_GHMoyaNetWorkTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GHMoyaNetWorkTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D522A9C6251345240041684C /* APILogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APILogin.swift; sourceTree = "<group>"; };
+		D522A9C8251345340041684C /* APIUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIUser.swift; sourceTree = "<group>"; };
+		D522A9CA251345930041684C /* APIShops.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIShops.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,14 +70,14 @@
 			path = "Router2(另外一种封装思路)";
 			sourceTree = "<group>";
 		};
-		246D441620734E56009D7A89 /* Router(懒人版) */ = {
+		246D441620734E56009D7A89 /* Router(懒人版) API.swift文件做DEMO展示用 */ = {
 			isa = PBXGroup;
 			children = (
 				24817493206E375700285D43 /* API.swift */,
 				246D441420726DC9009D7A89 /* NetworkManager.swift */,
 				246D441720734E82009D7A89 /* MoyaConfig.swift */,
 			);
-			path = "Router(懒人版)";
+			path = "Router(懒人版) API.swift文件做DEMO展示用";
 			sourceTree = "<group>";
 		};
 		24817475206E171200285D43 = {
@@ -95,8 +101,9 @@
 		24817480206E171300285D43 /* GHMoyaNetWorkTest */ = {
 			isa = PBXGroup;
 			children = (
+				D522A9C5251344F20041684C /* 多业务模块的拆分 */,
 				213A44DE238A650B00E41B05 /* Router2(另外一种封装思路) */,
-				246D441620734E56009D7A89 /* Router(懒人版) */,
+				246D441620734E56009D7A89 /* Router(懒人版) API.swift文件做DEMO展示用 */,
 				24817481206E171300285D43 /* AppDelegate.swift */,
 				246D441220725185009D7A89 /* GHItem.swift */,
 				24817483206E171300285D43 /* ViewController.swift */,
@@ -123,6 +130,16 @@
 				5B23A66C7079CAC3611D74EE /* Pods_GHMoyaNetWorkTest.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D522A9C5251344F20041684C /* 多业务模块的拆分 */ = {
+			isa = PBXGroup;
+			children = (
+				D522A9C6251345240041684C /* APILogin.swift */,
+				D522A9C8251345340041684C /* APIUser.swift */,
+				D522A9CA251345930041684C /* APIShops.swift */,
+			);
+			path = "多业务模块的拆分";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,11 +265,14 @@
 				246D441820734E82009D7A89 /* MoyaConfig.swift in Sources */,
 				24817484206E171300285D43 /* ViewController.swift in Sources */,
 				213A44E0238A651800E41B05 /* APIProvider.swift in Sources */,
+				D522A9CB251345930041684C /* APIShops.swift in Sources */,
 				24817494206E375700285D43 /* API.swift in Sources */,
 				213A44E4238A684D00E41B05 /* MomentsProvider.swift in Sources */,
+				D522A9C7251345240041684C /* APILogin.swift in Sources */,
 				246D441520726DC9009D7A89 /* NetworkManager.swift in Sources */,
 				246D441320725185009D7A89 /* GHItem.swift in Sources */,
 				24817482206E171300285D43 /* AppDelegate.swift in Sources */,
+				D522A9C9251345340041684C /* APIUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
