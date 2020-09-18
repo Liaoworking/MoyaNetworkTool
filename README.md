@@ -1,5 +1,13 @@
 [文章掘金地址](https://juejin.im/post/5acabf5b6fb9a028c71ebb10)
 
+-------2020.09.17 update----
+
+前一段时间网络框架优化，随着业务模块变复杂，发现现有Api接口的文件已经有一千行左右。迫不得已在原有的基础上做模块区分。
+
+具体的拆分可以在Demo中查看```多业务模块的拆分```文件夹，网络请求的封装部分逻辑基本不变。
+
+
+
 -------2020.03.07 update----
 
 经过我几年的项目实践，HandyJSON库是真的香，JSON转模型，方便。 ```但是有一点不得不提一下```,就是HandyJSON ```稳定性```相关的一些问题❗️❗️❗️，Swift5.0 的时候出过一个泛型解析失败的bug,后来修好了，iOS13.4 beta 的时候由于Swift改动底层源码 导致HandyJSON崩溃。 因为这个问题我们公司的项目专门发了一个bug fixed版本。   从稳定性的角度可以用业界比较多的SwiftJSON + Codable 或者ObjectMapper 来做JSON转模型。 
@@ -36,7 +44,7 @@
 
 # About Moya
 
-已经有大神把Moya的基本使用和各个模块的介绍说的很清楚了，这里就不赘述了，建议把框架的基本使用了解一番[【iOS开发】Moya入坑记-用法解读篇](http://www.codertian.com/2017/01/21/iOS-moya-ru-keng-usage/)  
+已经有大神把Moya的基本使用和各个模块的介绍说的很清楚了，这里就不赘述了，建议把框架的基本使用了解一番[【iOS开发】Moya入坑记-用法解读篇](https://www.jianshu.com/p/38fbc22a1e2b)  
 
 上文作为入门是一篇不错的文章，但作为实际开发过程中，健壮全方位考虑的网络框架来说的来说还有很多用法并没有提及。 而且网上很多文章都是老版本，看的时候会感觉有些懵。。。所以我就写了本文😑
 
@@ -146,6 +154,9 @@ extension API:TargetType{
 主要是完成对于Provider的完善及个性化设置。
 
 首先先看一个最简单的网络请求, 我们所有的请求都是来自于这个provider对象，测试一下 我们就能发出请求并拿到返回的结果。
+
+##### 注： 在2020.09.17下载的Demo中 provier 的对象的创建```MoyaProvider<API>```已经替换成了```MoyaProvider<MultiTarget(对多业务API情况的封装)>```包装好的枚举体，用以多业务的拆分。 具体可参考demo.  
+
 
 ```swift
         let provier = MoyaProvider<API>()
