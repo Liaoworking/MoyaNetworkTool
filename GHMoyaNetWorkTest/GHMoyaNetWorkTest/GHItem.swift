@@ -10,17 +10,7 @@ import Foundation
 import ObjectMapper
 
 
-class GHZhihuModel: Mappable {
-    required init?(map: Map) { }
-    
-    var stories:[GHItem]?
-    
-    func mapping(map: Map) {
-        stories <- map["stories"]
-    }
-}
-
-class GHItem: Mappable{
+class ZhihuItemModel: Mappable{
     required init?(map: Map) {}
     
     func mapping(map: Map) {

@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        testZhiHuDailyAPI()///演示moya+ObjectMapper
+        testZhiHuDailyAPI()///演示moya+ObjectMapper   大部分业务场景使用的是这个调用。
         testAPI()//调用这个方法只是演示post请求 接口是调不通的
         multiServiceModule() // 多业务模块使用
     }
@@ -29,18 +29,12 @@ class ViewController: UIViewController {
     }
     
     func testZhiHuDailyAPI() {
-        cancelableRequest = NetWorkRequest(API.easyRequset, completion: { (responseString) -> (Void) in
-            // DEMO中ObjectMapper转模型只是做一个演示，具体封装和用法可以参照
-            // https://github.com/tristanhimmelman/ObjectMapper
-            if let zhihuModel = GHZhihuModel(JSONString: responseString) {
-                zhihuModel.stories?.forEach({ (item) in
-                    print("模型属性--\(item.title ?? "模型无title")" )
-            })
-        }
-        }, failed: { (failedResutl) -> (Void) in
-            print("服务器返回code不为0000啦~\(failedResutl)")
-        }, errorResult: { () -> (Void) in
-            print("网络异常")
+        cancelableRequest = NetWorkRequest(API.easyRequset, modelType: [ZhihuItemModel].self, successCallback: { (zhihuModels, responseModel) in
+            zhihuModels.forEach({ (item) in
+                print("模型属性--\(item.title ?? "模型无title")" )
+        })
+        }, failureCallback: { (responseModel) in
+            print("网络请求失败 包括服务器错误和网络异常\(responseModel.code)__\(responseModel.message)")
         })
 
     }
@@ -52,9 +46,11 @@ class ViewController: UIViewController {
         paraDict["app_version_no_"] = "1.0.1"
         paraDict["platform_type_"] = "2"
         paraDict["ver_code_value_"] = nil
-        NetWorkRequest(API.updateAPi(parameters: paraDict)) { (responseString) -> (Void) in
-            //后台flag为1000是后台的result code
-            print(responseString)
+        
+        NetWorkRequest(API.updateAPi(parameters: paraDict), modelType: [ZhihuItemModel].self) { (zhihuModels, responseModel) in
+            print("服务器传回来的Array数据模型个数\(zhihuModels.count)")
+        } failureCallback: { (responseModel) in
+            print("网络请求失败 包括服务器错误和网络异常\(responseModel.code)__\(responseModel.message)")
         }
     }
     
@@ -65,28 +61,21 @@ class ViewController: UIViewController {
         para["juid"] = "id"
         para["file_type_"] = "head"
         
-        let imageData = UIImageJPEGRepresentation(UIImage(), 0.3) //把图片转换成data
-        NetWorkRequest(API.uploadHeadImage(parameters: para, imageDate: imageData!)) { (resultString) -> (Void) in
-            ///处理后台返回的json字符串
-        }
+        let imageData = UIImage().jpegData(compressionQuality: 0.3) //把图片转换成data
+        NetWorkRequest(API.uploadHeadImage(parameters: para, imageDate: imageData!),modelType: [ZhihuItemModel].self, successCallback: {_,_ in print("图片上传成功")}, failureCallback: nil)
+
     }
     
     
     /// 多业务模块时候的网络请求
     func multiServiceModule() {
         // 登录模块的网络请求
-        NetWorkRequest(APILogin.login) { (resultString) in
-            // do something here
-        }
-        
+        NetWorkRequest(APILogin.login, modelType: [ZhihuItemModel].self, successCallback: {_,_ in print("登录模块的api")}, failureCallback: nil)
         // 用户信息获取
-        NetWorkRequest(APIUser.getInfo) { (resultString) in
-            // do something here
-        }
+        NetWorkRequest(APIUser.getInfo, modelType: ZhihuItemModel.self, successCallback: {_,_ in print("用户模块的api")}, failureCallback: nil)
         // 商品列表获取
-        NetWorkRequest(APIShops.getGoods) { (resultString) in
-            // do something here
-        }
+        NetWorkRequest(APIShops.getGoods, modelType: [ZhihuItemModel].self, successCallback: {_,_ in print("商品模块的api")}, failureCallback: nil)
+
         
     }
     

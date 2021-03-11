@@ -60,14 +60,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		213A44DE238A650B00E41B05 /* Router2(另外一种封装思路) */ = {
+		213A44DE238A650B00E41B05 /* Router2(了解一下就行：另外一种封装思路) */ = {
 			isa = PBXGroup;
 			children = (
 				213A44DF238A651800E41B05 /* APIProvider.swift */,
 				213A44E1238A673400E41B05 /* MomentsAPI.swift */,
 				213A44E3238A684D00E41B05 /* MomentsProvider.swift */,
 			);
-			path = "Router2(另外一种封装思路)";
+			path = "Router2(了解一下就行：另外一种封装思路)";
 			sourceTree = "<group>";
 		};
 		246D441620734E56009D7A89 /* Router(懒人版) API.swift文件做DEMO展示用 */ = {
@@ -101,8 +101,8 @@
 		24817480206E171300285D43 /* GHMoyaNetWorkTest */ = {
 			isa = PBXGroup;
 			children = (
-				D522A9C5251344F20041684C /* 多业务模块的拆分 */,
-				213A44DE238A650B00E41B05 /* Router2(另外一种封装思路) */,
+				D522A9C5251344F20041684C /* 多业务模块的拆分(业务量大后使用这个) */,
+				213A44DE238A650B00E41B05 /* Router2(了解一下就行：另外一种封装思路) */,
 				246D441620734E56009D7A89 /* Router(懒人版) API.swift文件做DEMO展示用 */,
 				24817481206E171300285D43 /* AppDelegate.swift */,
 				246D441220725185009D7A89 /* GHItem.swift */,
@@ -132,14 +132,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D522A9C5251344F20041684C /* 多业务模块的拆分 */ = {
+		D522A9C5251344F20041684C /* 多业务模块的拆分(业务量大后使用这个) */ = {
 			isa = PBXGroup;
 			children = (
 				D522A9C6251345240041684C /* APILogin.swift */,
 				D522A9C8251345340041684C /* APIUser.swift */,
 				D522A9CA251345930041684C /* APIShops.swift */,
 			);
-			path = "多业务模块的拆分";
+			path = "多业务模块的拆分(业务量大后使用这个)";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -421,7 +421,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.liaoworking.GHMoyaNetWorkTest2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -438,7 +438,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.liaoworking.GHMoyaNetWorkTest2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
