@@ -70,14 +70,14 @@
 			path = "Router2(了解一下就行：另外一种封装思路)";
 			sourceTree = "<group>";
 		};
-		246D441620734E56009D7A89 /* Router(懒人版) API.swift文件做DEMO展示用 */ = {
+		246D441620734E56009D7A89 /* Router(main正式使用版本) */ = {
 			isa = PBXGroup;
 			children = (
 				24817493206E375700285D43 /* API.swift */,
 				246D441420726DC9009D7A89 /* NetworkManager.swift */,
 				246D441720734E82009D7A89 /* MoyaConfig.swift */,
 			);
-			path = "Router(懒人版) API.swift文件做DEMO展示用";
+			path = "Router(main正式使用版本)";
 			sourceTree = "<group>";
 		};
 		24817475206E171200285D43 = {
@@ -103,7 +103,7 @@
 			children = (
 				D522A9C5251344F20041684C /* 多业务模块的拆分(业务量大后使用这个) */,
 				213A44DE238A650B00E41B05 /* Router2(了解一下就行：另外一种封装思路) */,
-				246D441620734E56009D7A89 /* Router(懒人版) API.swift文件做DEMO展示用 */,
+				246D441620734E56009D7A89 /* Router(main正式使用版本) */,
 				24817481206E171300285D43 /* AppDelegate.swift */,
 				246D441220725185009D7A89 /* GHItem.swift */,
 				24817483206E171300285D43 /* ViewController.swift */,

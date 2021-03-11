@@ -146,59 +146,68 @@ private let networkPlugin = NetworkActivityPlugin.init { changeType, _ in
     }
 }
 
-// https://github.com/Moya/Moya/blob/master/docs/Providers.md  参数使用说明
-// stubClosure   用来延时发送网络请求
+/// https://github.com/Moya/Moya/blob/master/docs/Providers.md  参数使用说明
+/// 网络请求发送的核心初始化方法，创建网络请求对象
+fileprivate let Provider = MoyaProvider<MultiTarget>(endpointClosure: myEndpointClosure, requestClosure: requestClosure, plugins: [networkPlugin], trackInflights: false)
 
-/// /网络请求发送的核心初始化方法，创建网络请求对象
-let Provider = MoyaProvider<MultiTarget>(endpointClosure: myEndpointClosure, requestClosure: requestClosure, plugins: [networkPlugin], trackInflights: false)
-
-
-/// 最常用的网络请求，只需知道正确的结果无需其他操作时候用这个
-///
+/// 网络请求，当模型为dict类型
 /// - Parameters:
-///   - target: 网络请求
-///   - completion: 请求成功的回调
+///   - target: 接口
+///   - showFailAlert: 是否显示网络请求失败的弹框
+///   - modelType: 模型
+///   - successCallback: 成功的回调
+///   - failureCallback: 失败的回调
+/// - Returns: 取消当前网络请求Cancellable实例
 @discardableResult
-func NetWorkRequest<T: Mappable>(_ target: TargetType, showFailAlert: Bool = true, modelType: T.Type, successCallback:@escaping RequestModelSuccessCallback<T>, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
+func NetWorkRequest<T: Mappable>(_ target: TargetType, needShowFailAlert: Bool = true, modelType: T.Type, successCallback:@escaping RequestModelSuccessCallback<T>, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
 //    return NetWorkRequest(target, showFailAlert: showFailAlert, modelType: modelType, successCallback: successCallback, failureCallback: nil)
-    return NetWorkRequest(target, showFailAlert: showFailAlert, successCallback: { (responseModel) in
+    return NetWorkRequest(target, needShowFailAlert: needShowFailAlert, successCallback: { (responseModel) in
         
         if let model = T(JSONString: responseModel.data) {
             successCallback(model, responseModel)
         } else {
-            errorHandler(code: responseModel.code , message: "解析失败", showFailAlert: showFailAlert, failure: failureCallback)
+            errorHandler(code: responseModel.code , message: "解析失败", needShowFailAlert: needShowFailAlert, failure: failureCallback)
         }
         
     }, failureCallback: failureCallback)
 }
 
-/// 网络请求的基础方法
-///
+/// 网络请求，当模型为dict类型
 /// - Parameters:
-///   - target: 网络请求
-///   - successCallback: 成功回调
-///   - failureCallback: 失败回调 9999代表无网络
+///   - target: 接口
+///   - showFailAlert: 是否显示网络请求失败的弹框
+///   - modelType: 模型
+///   - successCallback: 成功的回调
+///   - failureCallback: 失败的回调
+/// - Returns: 取消当前网络请求Cancellable实例
 @discardableResult
-func NetWorkRequest<T: Mappable>(_ target: TargetType, showFailAlert: Bool = true, modelType: [T].Type, successCallback:@escaping RequestModelsSuccessCallback<T>, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
-    return NetWorkRequest(target, showFailAlert: showFailAlert, successCallback: { (responseModel) in
+func NetWorkRequest<T: Mappable>(_ target: TargetType, needShowFailAlert: Bool = true, modelType: [T].Type, successCallback:@escaping RequestModelsSuccessCallback<T>, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
+    return NetWorkRequest(target, needShowFailAlert: needShowFailAlert, successCallback: { (responseModel) in
         
         if let model = [T](JSONString: responseModel.data) {
             successCallback(model, responseModel)
         } else {
-            errorHandler(code: responseModel.code , message: "解析失败", showFailAlert: showFailAlert, failure: failureCallback)
+            errorHandler(code: responseModel.code , message: "解析失败", needShowFailAlert: needShowFailAlert, failure: failureCallback)
         }
         
     }, failureCallback: failureCallback)
 }
 
 
-fileprivate func NetWorkRequest(_ target: TargetType, showFailAlert: Bool = true, successCallback:@escaping RequestFailureCallback, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
+/// 网络请求的基础方法
+/// - Parameters:
+///   - target: 接口
+///   - showFailAlert: 是否显示网络请求失败的弹框
+///   - successCallback: 成功的回调
+///   - failureCallback: 失败的回调
+/// - Returns: 取消当前网络请求Cancellable实例
+fileprivate func NetWorkRequest(_ target: TargetType, needShowFailAlert: Bool = true, successCallback:@escaping RequestFailureCallback, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
     
     
     // 先判断网络是否有链接 没有的话直接返回--代码略
     if !UIDevice.isNetworkConnect {
         // code = 9999 代表无网络  这里根据具体业务来自定义
-        errorHandler(code: 9999, message: "网络似乎出现了问题", showFailAlert: showFailAlert, failure: failureCallback)
+        errorHandler(code: 9999, message: "网络似乎出现了问题", needShowFailAlert: needShowFailAlert, failure: failureCallback)
         return nil
     }
     return Provider.request(MultiTarget(target)) { result in
@@ -207,7 +216,7 @@ fileprivate func NetWorkRequest(_ target: TargetType, showFailAlert: Bool = true
             do {
                 let jsonData = try JSON(data: response.data)
                 print("返回结果是：\(jsonData)")
-                if !validateRepsonse(response: jsonData.dictionary, showFailAlert: showFailAlert, failure: failureCallback) { return }
+                if !validateRepsonse(response: jsonData.dictionary, needShowFailAlert: needShowFailAlert, failure: failureCallback) { return }
                 let respModel = ResponseModel()
                 /// 这里的 -999的code码 需要根据具体业务来设置
                 respModel.code = jsonData[codeKey].int ?? -999
@@ -217,16 +226,16 @@ fileprivate func NetWorkRequest(_ target: TargetType, showFailAlert: Bool = true
                     respModel.data = jsonData[dataKey].rawString() ?? ""
                     successCallback(respModel)
                 } else {
-                    errorHandler(code: respModel.code , message: respModel.message , showFailAlert: showFailAlert, failure: failureCallback)
+                    errorHandler(code: respModel.code , message: respModel.message , needShowFailAlert: needShowFailAlert, failure: failureCallback)
                     return
                 }
 
             } catch {
                 // code = 1000000 代表JSON解析失败  这里根据具体业务来自定义
-                errorHandler(code: 1000000, message: String(data: response.data, encoding: String.Encoding.utf8)!, showFailAlert: showFailAlert, failure: failureCallback)
+                errorHandler(code: 1000000, message: String(data: response.data, encoding: String.Encoding.utf8)!, needShowFailAlert: needShowFailAlert, failure: failureCallback)
             }
         case let .failure(error as NSError):
-            errorHandler(code: error.code, message: "网络连接失败", showFailAlert: showFailAlert, failure: failureCallback)
+            errorHandler(code: error.code, message: "网络连接失败", needShowFailAlert: needShowFailAlert, failure: failureCallback)
         }
     }
     
@@ -239,7 +248,7 @@ fileprivate func NetWorkRequest(_ target: TargetType, showFailAlert: Bool = true
 ///   - showFailAlet: 是否显示失败的弹框
 ///   - failure: 失败的回调
 /// - Returns: 数据是否有效
-private func validateRepsonse(response: [String: JSON]?, showFailAlert: Bool, failure: RequestFailureCallback?) -> Bool {
+private func validateRepsonse(response: [String: JSON]?, needShowFailAlert: Bool, failure: RequestFailureCallback?) -> Bool {
     /**
     var errorMessage: String = ""
     if response != nil {
@@ -267,12 +276,19 @@ private func validateRepsonse(response: [String: JSON]?, showFailAlert: Bool, fa
 
     return true
 }
-private func errorHandler(code: Int, message: String, showFailAlert: Bool, failure: RequestFailureCallback?) {
+
+/// 错误处理
+/// - Parameters:
+///   - code: code码
+///   - message: 错误消息
+///   - needShowFailAlert: 是否显示网络请求失败的弹框
+///   - failure: 网络请求失败的回调
+private func errorHandler(code: Int, message: String, needShowFailAlert: Bool, failure: RequestFailureCallback?) {
     print("发生错误：\(code)--\(message)")
     let model = ResponseModel()
     model.code = code
     model.message = message
-    if showFailAlert {
+    if needShowFailAlert {
         // 弹框
         print("弹出错误信息弹框\(message)")
     }
