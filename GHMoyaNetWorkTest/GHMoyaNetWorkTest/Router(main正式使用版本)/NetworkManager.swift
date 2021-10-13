@@ -19,15 +19,15 @@ typealias RequestModelSuccessCallback<T:Mappable> = ((T,ResponseModel?) -> Void)
 // 数组模型的成功回调 包括： 模型数组， 网络请求的模型(code,message,data等，具体根据业务来定)
 typealias RequestModelsSuccessCallback<T:Mappable> = (([T],ResponseModel?) -> Void)
 
-// 失败回调 包括：网络请求的模型(code,message,data等，具体根据业务来定)
-typealias RequestFailureCallback = ((ResponseModel) -> Void)
+// 网络请求的回调 包括：网络请求的模型(code,message,data等，具体根据业务来定)
+typealias RequestCallback = ((ResponseModel) -> Void)
 /// 网络错误的回调
 typealias errorCallback = (() -> Void)
 
 /// dataKey一般是 "data"  这里用的知乎daily 的接口 为stories
-let dataKey = "stories"
-let messageKey = "message"
-let codeKey = "code"
+let responseDataKey = "stories"
+let responseMessageKey = "message"
+let responseCodeKey = "code"
 let successCode: Int = -999
 
 /// 网络请求的基本设置,这里可以拿到是具体的哪个网络请求，可以在这里做一些设置
@@ -159,11 +159,11 @@ fileprivate let Provider = MoyaProvider<MultiTarget>(endpointClosure: myEndpoint
 ///   - failureCallback: 失败的回调
 /// - Returns: 取消当前网络请求Cancellable实例
 @discardableResult
-func NetWorkRequest<T: Mappable>(_ target: TargetType, needShowFailAlert: Bool = true, modelType: T.Type, successCallback:@escaping RequestModelSuccessCallback<T>, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
+func NetWorkRequest<T: Mappable>(_ target: TargetType, needShowFailAlert: Bool = true, modelType: T.Type, successCallback:@escaping RequestModelSuccessCallback<T>, failureCallback: RequestCallback? = nil) -> Cancellable? {
 //    return NetWorkRequest(target, showFailAlert: showFailAlert, modelType: modelType, successCallback: successCallback, failureCallback: nil)
     return NetWorkRequest(target, needShowFailAlert: needShowFailAlert, successCallback: { (responseModel) in
         
-        if let model = T(JSONString: responseModel.data) {
+        if let model = T(JSONString: responseModel.dataString) {
             successCallback(model, responseModel)
         } else {
             errorHandler(code: responseModel.code , message: "解析失败", needShowFailAlert: needShowFailAlert, failure: failureCallback)
@@ -181,10 +181,10 @@ func NetWorkRequest<T: Mappable>(_ target: TargetType, needShowFailAlert: Bool =
 ///   - failureCallback: 失败的回调
 /// - Returns: 取消当前网络请求Cancellable实例
 @discardableResult
-func NetWorkRequest<T: Mappable>(_ target: TargetType, needShowFailAlert: Bool = true, modelType: [T].Type, successCallback:@escaping RequestModelsSuccessCallback<T>, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
+func NetWorkRequest<T: Mappable>(_ target: TargetType, needShowFailAlert: Bool = true, modelType: [T].Type, successCallback:@escaping RequestModelsSuccessCallback<T>, failureCallback: RequestCallback? = nil) -> Cancellable? {
     return NetWorkRequest(target, needShowFailAlert: needShowFailAlert, successCallback: { (responseModel) in
         
-        if let model = [T](JSONString: responseModel.data) {
+        if let model = [T](JSONString: responseModel.dataString) {
             successCallback(model, responseModel)
         } else {
             errorHandler(code: responseModel.code , message: "解析失败", needShowFailAlert: needShowFailAlert, failure: failureCallback)
@@ -201,7 +201,7 @@ func NetWorkRequest<T: Mappable>(_ target: TargetType, needShowFailAlert: Bool =
 ///   - successCallback: 成功的回调
 ///   - failureCallback: 失败的回调
 /// - Returns: 取消当前网络请求Cancellable实例
-fileprivate func NetWorkRequest(_ target: TargetType, needShowFailAlert: Bool = true, successCallback:@escaping RequestFailureCallback, failureCallback: RequestFailureCallback? = nil) -> Cancellable? {
+fileprivate func NetWorkRequest(_ target: TargetType, needShowFailAlert: Bool = true, successCallback:@escaping RequestCallback, failureCallback: RequestCallback? = nil) -> Cancellable? {
     
     
     // 先判断网络是否有链接 没有的话直接返回--代码略
@@ -219,11 +219,11 @@ fileprivate func NetWorkRequest(_ target: TargetType, needShowFailAlert: Bool = 
                 if !validateRepsonse(response: jsonData.dictionary, needShowFailAlert: needShowFailAlert, failure: failureCallback) { return }
                 let respModel = ResponseModel()
                 /// 这里的 -999的code码 需要根据具体业务来设置
-                respModel.code = jsonData[codeKey].int ?? -999
-                respModel.message = jsonData[messageKey].stringValue
+                respModel.code = jsonData[responseCodeKey].int ?? -999
+                respModel.message = jsonData[responseMessageKey].stringValue
 
                 if respModel.code == successCode {
-                    respModel.data = jsonData[dataKey].rawString() ?? ""
+                    respModel.dataString = jsonData[responseDataKey].rawString() ?? ""
                     successCallback(respModel)
                 } else {
                     errorHandler(code: respModel.code , message: respModel.message , needShowFailAlert: needShowFailAlert, failure: failureCallback)
@@ -248,7 +248,7 @@ fileprivate func NetWorkRequest(_ target: TargetType, needShowFailAlert: Bool = 
 ///   - showFailAlet: 是否显示失败的弹框
 ///   - failure: 失败的回调
 /// - Returns: 数据是否有效
-private func validateRepsonse(response: [String: JSON]?, needShowFailAlert: Bool, failure: RequestFailureCallback?) -> Bool {
+private func validateRepsonse(response: [String: JSON]?, needShowFailAlert: Bool, failure: RequestCallback?) -> Bool {
     /**
     var errorMessage: String = ""
     if response != nil {
@@ -283,7 +283,7 @@ private func validateRepsonse(response: [String: JSON]?, needShowFailAlert: Bool
 ///   - message: 错误消息
 ///   - needShowFailAlert: 是否显示网络请求失败的弹框
 ///   - failure: 网络请求失败的回调
-private func errorHandler(code: Int, message: String, needShowFailAlert: Bool, failure: RequestFailureCallback?) {
+private func errorHandler(code: Int, message: String, needShowFailAlert: Bool, failure: RequestCallback?) {
     print("发生错误：\(code)--\(message)")
     let model = ResponseModel()
     model.code = code
@@ -307,7 +307,7 @@ class ResponseModel {
     var code: Int = -999
     var message: String = ""
     // 这里的data用String类型 保存response.data
-    var data: String = ""
+    var dataString: String = ""
     /// 分页的游标 根据具体的业务选择是否添加这个属性
     var cursor: String = ""
 }
