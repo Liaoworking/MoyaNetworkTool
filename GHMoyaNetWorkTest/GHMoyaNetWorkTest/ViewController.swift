@@ -46,12 +46,27 @@ class ViewController: UIViewController {
         paraDict["app_version_no_"] = "1.0.1"
         paraDict["platform_type_"] = "2"
         paraDict["ver_code_value_"] = nil
-        
+        // 需要解析单个模型 ✌️✌️✌️✌️
         NetWorkRequest(API.updateAPi(parameters: paraDict), modelType: ZhihuItemModel.self) { (zhihuModel, responseModel) in
+            print("服务器传回来的单个数据模型\(zhihuModel)")
+        } failureCallback: { (responseModel) in
+            print("网络请求失败 包括服务器错误和网络异常\(responseModel.code)__\(responseModel.message)")
+        }
+        
+        // 需要解析数组模型  ✌️✌️✌️✌️
+        NetWorkRequest(API.updateAPi(parameters: paraDict), modelType: [ZhihuItemModel].self) { (zhihuModel, responseModel) in
             print("服务器传回来的Array数据模型\(zhihuModel)")
         } failureCallback: { (responseModel) in
             print("网络请求失败 包括服务器错误和网络异常\(responseModel.code)__\(responseModel.message)")
         }
+        
+        // 不需要解析模型  只关心网络请求的成功或者失败  ✌️✌️✌️✌️
+        NetWorkRequest(API.updateAPi(parameters: paraDict)) { responseModel in
+            print("网络请求成功")
+        } failureCallback: { (responseModel) in
+            print("网络请求失败 包括服务器错误和网络异常\(responseModel.code)__\(responseModel.message)")
+        }
+        
     }
     
     /// muti-form 多表单文件上传，这里使用的是png图片上传--接口地址是我瞎写的， 你按照实际后台地址写就行

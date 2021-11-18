@@ -201,7 +201,8 @@ func NetWorkRequest<T: Mappable>(_ target: TargetType, needShowFailAlert: Bool =
 ///   - successCallback: 成功的回调
 ///   - failureCallback: 失败的回调
 /// - Returns: 取消当前网络请求Cancellable实例
-fileprivate func NetWorkRequest(_ target: TargetType, needShowFailAlert: Bool = true, successCallback:@escaping RequestCallback, failureCallback: RequestCallback? = nil) -> Cancellable? {
+@discardableResult
+func NetWorkRequest(_ target: TargetType, needShowFailAlert: Bool = true, successCallback:@escaping RequestCallback, failureCallback: RequestCallback? = nil) -> Cancellable? {
     
     
     // 先判断网络是否有链接 没有的话直接返回--代码略
