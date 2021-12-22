@@ -66,14 +66,14 @@ private let myEndpointClosure = { (target: TargetType) -> Endpoint in
     )
     requestTimeOut = 30 // 每次请求都会调用endpointClosure 到这里设置超时时长 也可单独每个接口设置
     // 针对于某个具体的业务模块来做接口配置
-    if let apiTarget = target as? API {
-        switch apiTarget {
+    if let apiTarget = target as? MultiTarget,
+       let target = apiTarget.target as? API {
+        switch target {
         case .easyRequset:
             return endpoint
         case .register:
             requestTimeOut = 5
             return endpoint
-
         default:
             return endpoint
         }

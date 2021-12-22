@@ -17,7 +17,7 @@ enum API{
     case easyRequset
 }
 
-extension API:TargetType{
+extension API:TargetType {
     var baseURL: URL {
         switch self {
         case .easyRequset:

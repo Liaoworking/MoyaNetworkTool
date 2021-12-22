@@ -16,10 +16,12 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        testZhiHuDailyAPI()///演示moya+ObjectMapper   大部分业务场景使用的是这种形式调用。
-        testAPI()//调用这个方法只是演示post请求 接口是调不通的
-        multiServiceModule() // 多业务模块使用
+        // 演示moya+ObjectMapper 接口可以调通
+        testZhiHuDailyAPI()
+        // 这个方法只是演示 返回单个对象、返回数组、和不关心服务器返回的数据 的网络请求 接口调不通的
+        testAPI()
+        // 多业务模块划分 减少单个文件的API数
+        multiServiceModule()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -54,8 +56,8 @@ class ViewController: UIViewController {
         }
         
         // 需要解析数组模型  ✌️✌️✌️✌️
-        NetWorkRequest(API.updateAPi(parameters: paraDict), modelType: [ZhihuItemModel].self) { (zhihuModel, responseModel) in
-            print("服务器传回来的Array数据模型\(zhihuModel)")
+        NetWorkRequest(API.updateAPi(parameters: paraDict), modelType: [ZhihuItemModel].self) { (zhihuModels, responseModel) in
+            print("服务器传回来的Array数据模型\(zhihuModels)")
         } failureCallback: { (responseModel) in
             print("网络请求失败 包括服务器错误和网络异常\(responseModel.code)__\(responseModel.message)")
         }
