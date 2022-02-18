@@ -14,10 +14,10 @@ import SwiftyJSON
 /// 超时时长
 private var requestTimeOut: Double = 30
 // 单个模型的成功回调 包括： 模型，网络请求的模型(code,message,data等，具体根据业务来定)
-typealias RequestModelSuccessCallback<T:Mappable> = ((T,ResponseModel?) -> Void)
+typealias RequestModelSuccessCallback<T:Mappable> = ((T,ResponseModel) -> Void)
 
 // 数组模型的成功回调 包括： 模型数组， 网络请求的模型(code,message,data等，具体根据业务来定)
-typealias RequestModelsSuccessCallback<T:Mappable> = (([T],ResponseModel?) -> Void)
+typealias RequestModelsSuccessCallback<T:Mappable> = (([T],ResponseModel) -> Void)
 
 // 网络请求的回调 包括：网络请求的模型(code,message,data等，具体根据业务来定)
 typealias RequestCallback = ((ResponseModel) -> Void)
@@ -321,4 +321,44 @@ extension UIDevice {
         let network = NetworkReachabilityManager()
         return network?.isReachable ?? true // 无返回就默认网络已连接
     }
+}
+
+
+/**
+ 下面的三个方法是对于 Swift5.5 Concurrency的支持  目前(2022.02.18)一般项目中还用不到。 可自行删除
+ */
+@available(iOS 13.0, *)
+@discardableResult
+func NetWorkRequest<T: Mappable>(_ target: TargetType, needShowFailAlert: Bool = true, modelType: T.Type) async -> (model:T?,response: ResponseModel) {
+    await withCheckedContinuation({ continuation in
+        NetWorkRequest(target, needShowFailAlert: needShowFailAlert, modelType: modelType) { model, responseModel in
+            continuation.resume(returning: (model,responseModel))
+        } failureCallback: { responseModel in
+            continuation.resume(returning: (nil,responseModel))
+        }
+    })
+}
+
+@available(iOS 13.0, *)
+@discardableResult
+func NetWorkRequest<T: Mappable>(_ target: TargetType, needShowFailAlert: Bool = true, modelType: [T].Type) async -> (model:[T]?,response: ResponseModel) {
+    await withCheckedContinuation({ continuation in
+        NetWorkRequest(target, needShowFailAlert: needShowFailAlert, modelType: modelType) { model, responseModel in
+            continuation.resume(returning: (model,responseModel))
+        } failureCallback: { responseModel in
+            continuation.resume(returning: (nil,responseModel))
+        }
+    })
+}
+
+@available(iOS 13.0, *)
+@discardableResult
+func NetWorkRequest(_ target: TargetType, needShowFailAlert: Bool = true) async -> ResponseModel {
+    await withCheckedContinuation({ continuation in
+        NetWorkRequest(target, needShowFailAlert: needShowFailAlert, successCallback: {(responseModel) in
+            continuation.resume(returning: responseModel)
+        }, failureCallback:{(responseModel) in
+            continuation.resume(returning: responseModel)
+        })
+    })
 }

@@ -16,18 +16,30 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addPresentButton()
         // 演示moya+ObjectMapper 接口可以调通
         testZhiHuDailyAPI()
-        // 这个方法只是演示 返回单个对象、返回数组、和不关心服务器返回的数据 的网络请求 接口调不通的
-        testAPI()
-        // 多业务模块划分 减少单个文件的API数
-        multiServiceModule()
+        // 这个方法只是演示 返回单个对象、返回数组、和不关心服务器返回的数据 的网络请求 接口调不通的 查看流程可自己打开注释
+//        testAPI()
+        // 多业务模块划分 减少单个文件的API数 查看流程可自己打开注释
+//        multiServiceModule()
     }
-
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         // 有些时候的需求是页面退出是取消网络请求。
         cancelableRequest?.cancel()
+    }
+    
+    func addPresentButton() {
+        let asyncButton = UIButton(type: .custom)
+        asyncButton.frame = CGRect(x: 0, y: 100, width: 280, height: 40)
+        asyncButton.addTarget(self, action: #selector(showAsyncNetWorkRequest), for: .touchUpInside)
+        asyncButton.setTitle("Swift5.5 Concurrency support", for: .normal)
+        asyncButton.titleLabel?.numberOfLines = 2
+        asyncButton.titleLabel?.font = .systemFont(ofSize: 16)
+        asyncButton.setTitleColor(.black, for: .normal)
+        view.addSubview(asyncButton)
     }
     
     func testZhiHuDailyAPI() {
@@ -38,7 +50,6 @@ class ViewController: UIViewController {
         }, failureCallback: { (responseModel) in
             print("网络请求失败 包括服务器错误和网络异常\(responseModel.code)__\(responseModel.message)")
         })
-
     }
     
     /// 基本使用 网络请求只是参考 具体接口调不通
@@ -92,6 +103,9 @@ class ViewController: UIViewController {
         NetWorkRequest(APIShops.getGoods, modelType: [ZhihuItemModel].self, successCallback: {_,_ in print("商品模块的api")}, failureCallback: nil)
     }
     
+    @objc func showAsyncNetWorkRequest() {
+        present(ConcurrencyDemoVC(), animated: true, completion: nil)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
