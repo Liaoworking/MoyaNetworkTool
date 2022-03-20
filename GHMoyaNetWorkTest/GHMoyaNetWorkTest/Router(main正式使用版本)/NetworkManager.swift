@@ -115,21 +115,21 @@ private let requestClosure = { (endpoint: Endpoint, done: MoyaProvider.RequestRe
  ]
  */
 
-// 用Moya默认的Manager还是Alamofire的Manager看实际需求。HTTPS就要手动实现Manager了
-// private public func defaultAlamofireManager() -> Manager {
+// 用Moya默认的Manager还是Alamofire的Session看实际需求。HTTPS就要手动实现Session了
+// private func defaultAlamofireSession() -> Session {
 //
-//    let configuration = URLSessionConfiguration.default
+////     let configuration = Alamofire.Session.default
 //
-//    configuration.httpAdditionalHeaders = Alamofire.SessionManager.defaultHTTPHeaders
+//     let configuration = URLSessionConfiguration.default
+//     configuration.headers = .default
 //
-//    let policies: [String: ServerTrustPolicy] = [
-//        "ap.grtstar.cn": .disableEvaluation
-//    ]
-//    let manager = Alamofire.SessionManager(configuration: configuration,serverTrustPolicyManager: ServerTrustPolicyManager(policies: policies))
+//     let policies: [String: ServerTrustEvaluating] = ["demo.mXXme.com": DisabledTrustEvaluator()]
 //
-//    manager.startRequestsImmediately = false
+//     let session = Session(configuration: configuration,
+//                           startRequestsImmediately: false,
+//                           serverTrustManager: ServerTrustManager(evaluators: policies))
 //
-//    return manager
+//    return session
 // }
 
 /// NetworkActivityPlugin插件用来监听网络请求，界面上做相应的展示
