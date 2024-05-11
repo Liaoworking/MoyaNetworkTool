@@ -29,6 +29,7 @@ let responseMessageKey = "message"
 let responseCodeKey = "code"
 let successCode: Int = -999
 
+private let moyaJSONDecoder = JSONDecoder()
 /// 网络请求的基本设置,这里可以拿到是具体的哪个网络请求，可以在这里做一些设置
 private let myEndpointClosure = { (target: TargetType) -> Endpoint in
     /// 这里把endpoint重新构造一遍主要为了解决网络请求地址里面含有? 时无法解析的bug https://github.com/Moya/Moya/issues/1198
@@ -168,7 +169,7 @@ func NetWorkRequest<T: Codable>(_ target: TargetType, needShowFailAlert: Bool = 
         }
         
         do {
-            let result = try JSONDecoder().decode(T.self, from: modelData)
+            let result = try moyaJSONDecoder.decode(T.self, from: modelData)
             successCallback(result, responseModel)
         } catch let error {
             errorHandler(code: responseModel.code , message: "error:\(error)", needShowFailAlert: needShowFailAlert, failure: failureCallback)
@@ -194,7 +195,7 @@ func NetWorkRequest<T: Codable>(_ target: TargetType, needShowFailAlert: Bool = 
         }
         
         do {
-            let result = try JSONDecoder().decode([T].self, from: modelData)
+            let result = try moyaJSONDecoder.decode([T].self, from: modelData)
             successCallback(result, responseModel)
         } catch let error {
             errorHandler(code: responseModel.code , message: "error:\(error)", needShowFailAlert: needShowFailAlert, failure: failureCallback)
