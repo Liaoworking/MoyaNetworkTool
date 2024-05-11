@@ -4,7 +4,8 @@
 -------2024.05.11 update----
 
 最近换了新的公司，公司的项目比较新兼容的版本也比较高，使用的Codable进行的JSON模型转换。
-随着HandyJSON 放弃维护和 Codable 日益强大 
+随着HandyJSON 放弃维护和 Codable 日益强大。
+写本项目的时候Codable才刚刚推出，还不完善。
 最新版的Demo JSON转模型使用Codable进行转换。 
 移除了HandyJSON 和 ObjectMapper
 
