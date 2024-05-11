@@ -3,7 +3,7 @@ source "https://github.com/CocoaPods/Specs.git"
 platform :ios, “13.0”
 use_frameworks!
 target ‘GHMoyaNetWorkTest’ do
-pod 'Moya', '~> 14.0'
+pod 'Moya', '15.0.0'
 pod 'SwiftyJSON'
 #pod 'HandyJSON'
 pod 'ObjectMapper'
