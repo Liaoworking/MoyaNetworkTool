@@ -8,7 +8,6 @@
 
 import Foundation
 import Moya
-import SwiftyJSON
 class MomentsProvider: MoyaProvider<MomentsAPI> {
     override init(endpointClosure: @escaping MoyaProvider<Target>.EndpointClosure = MoyaProvider<Target>.defaultEndpointMapping,
                   requestClosure: @escaping MoyaProvider<Target>.RequestClosure = MoyaProvider<Target>.defaultRequestMapping,

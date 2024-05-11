@@ -8,7 +8,6 @@
 
 import Foundation
 import Moya
-import SwiftyJSON
 // 把不同的业务逻辑拆开管理
 class APIProvider: MoyaProvider<API> {
     override init(endpointClosure: @escaping MoyaProvider<Target>.EndpointClosure = MoyaProvider<Target>.defaultEndpointMapping,

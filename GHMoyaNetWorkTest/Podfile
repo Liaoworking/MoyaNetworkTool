@@ -6,5 +6,5 @@ target ‘GHMoyaNetWorkTest’ do
 pod 'Moya', '15.0.0'
 pod 'SwiftyJSON'
 #pod 'HandyJSON'
-pod 'ObjectMapper'
+#pod 'ObjectMapper'
 end

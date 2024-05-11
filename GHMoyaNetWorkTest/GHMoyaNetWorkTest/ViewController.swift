@@ -8,7 +8,6 @@
 
 import UIKit
 import Moya
-import SwiftyJSON
 class ViewController: UIViewController {
 
     /// 用来主动取消网络请求

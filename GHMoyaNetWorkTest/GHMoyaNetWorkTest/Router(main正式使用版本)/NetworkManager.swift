@@ -8,16 +8,15 @@
 
 import Alamofire
 import Foundation
-import ObjectMapper
 import Moya
 import SwiftyJSON
 /// 超时时长
 private var requestTimeOut: Double = 30
 // 单个模型的成功回调 包括： 模型，网络请求的模型(code,message,data等，具体根据业务来定)
-typealias RequestModelSuccessCallback<T:Mappable> = ((T,ResponseModel) -> Void)
+typealias RequestModelSuccessCallback<T:Codable> = ((T,ResponseModel) -> Void)
 
 // 数组模型的成功回调 包括： 模型数组， 网络请求的模型(code,message,data等，具体根据业务来定)
-typealias RequestModelsSuccessCallback<T:Mappable> = (([T],ResponseModel) -> Void)
+typealias RequestModelsSuccessCallback<T:Codable> = (([T],ResponseModel) -> Void)
 
 // 网络请求的回调 包括：网络请求的模型(code,message,data等，具体根据业务来定)
 typealias RequestCallback = ((ResponseModel) -> Void)
@@ -159,16 +158,21 @@ fileprivate let Provider = MoyaProvider<MultiTarget>(endpointClosure: myEndpoint
 ///   - failureCallback: 失败的回调
 /// - Returns: 取消当前网络请求Cancellable实例
 @discardableResult
-func NetWorkRequest<T: Mappable>(_ target: TargetType, needShowFailAlert: Bool = true, modelType: T.Type, successCallback:@escaping RequestModelSuccessCallback<T>, failureCallback: RequestCallback? = nil) -> Cancellable? {
+func NetWorkRequest<T: Codable>(_ target: TargetType, needShowFailAlert: Bool = true, modelType: T.Type, successCallback:@escaping RequestModelSuccessCallback<T>, failureCallback: RequestCallback? = nil) -> Cancellable? {
 //    return NetWorkRequest(target, showFailAlert: showFailAlert, modelType: modelType, successCallback: successCallback, failureCallback: nil)
     return NetWorkRequest(target, needShowFailAlert: needShowFailAlert, successCallback: { (responseModel) in
         
-        if let model = T(JSONString: responseModel.dataString) {
-            successCallback(model, responseModel)
-        } else {
-            errorHandler(code: responseModel.code , message: "解析失败", needShowFailAlert: needShowFailAlert, failure: failureCallback)
+        guard let modelData = responseModel.dataString.data(using: .utf8) else {
+            errorHandler(code: responseModel.code , message: "error: string to data failed", needShowFailAlert: needShowFailAlert, failure: failureCallback)
+            return
         }
         
+        do {
+            let result = try JSONDecoder().decode(T.self, from: modelData)
+            successCallback(result, responseModel)
+        } catch let error {
+            errorHandler(code: responseModel.code , message: "error:\(error)", needShowFailAlert: needShowFailAlert, failure: failureCallback)
+        }
     }, failureCallback: failureCallback)
 }
 
@@ -181,19 +185,24 @@ func NetWorkRequest<T: Mappable>(_ target: TargetType, needShowFailAlert: Bool =
 ///   - failureCallback: 失败的回调
 /// - Returns: 取消当前网络请求Cancellable实例
 @discardableResult
-func NetWorkRequest<T: Mappable>(_ target: TargetType, needShowFailAlert: Bool = true, modelType: [T].Type, successCallback:@escaping RequestModelsSuccessCallback<T>, failureCallback: RequestCallback? = nil) -> Cancellable? {
+func NetWorkRequest<T: Codable>(_ target: TargetType, needShowFailAlert: Bool = true, modelType: [T].Type, successCallback:@escaping RequestModelsSuccessCallback<T>, failureCallback: RequestCallback? = nil) -> Cancellable? {
     return NetWorkRequest(target, needShowFailAlert: needShowFailAlert, successCallback: { (responseModel) in
         
-        if let model = [T](JSONString: responseModel.dataString) {
-            successCallback(model, responseModel)
-        } else {
-            errorHandler(code: responseModel.code , message: "解析失败", needShowFailAlert: needShowFailAlert, failure: failureCallback)
+        guard let modelData = responseModel.dataString.data(using: .utf8) else { 
+            errorHandler(code: responseModel.code , message: "error: string to data failed", needShowFailAlert: needShowFailAlert, failure: failureCallback)
+            return
         }
         
+        do {
+            let result = try JSONDecoder().decode([T].self, from: modelData)
+            successCallback(result, responseModel)
+        } catch let error {
+            errorHandler(code: responseModel.code , message: "error:\(error)", needShowFailAlert: needShowFailAlert, failure: failureCallback)
+        }
     }, failureCallback: failureCallback)
 }
 
-
+// MARK: - 网络请求的核心方法
 /// 网络请求的基础方法
 /// - Parameters:
 ///   - target: 接口
@@ -329,7 +338,7 @@ extension UIDevice {
  */
 @available(iOS 13.0, *)
 @discardableResult
-func NetWorkRequest<T: Mappable>(_ target: TargetType, needShowFailAlert: Bool = true, modelType: T.Type) async -> (model:T?,response: ResponseModel) {
+func NetWorkRequest<T: Codable>(_ target: TargetType, needShowFailAlert: Bool = true, modelType: T.Type) async -> (model:T?,response: ResponseModel) {
     await withCheckedContinuation({ continuation in
         NetWorkRequest(target, needShowFailAlert: needShowFailAlert, modelType: modelType) { model, responseModel in
             continuation.resume(returning: (model,responseModel))
@@ -341,7 +350,7 @@ func NetWorkRequest<T: Mappable>(_ target: TargetType, needShowFailAlert: Bool =
 
 @available(iOS 13.0, *)
 @discardableResult
-func NetWorkRequest<T: Mappable>(_ target: TargetType, needShowFailAlert: Bool = true, modelType: [T].Type) async -> (model:[T]?,response: ResponseModel) {
+func NetWorkRequest<T: Codable>(_ target: TargetType, needShowFailAlert: Bool = true, modelType: [T].Type) async -> (model:[T]?,response: ResponseModel) {
     await withCheckedContinuation({ continuation in
         NetWorkRequest(target, needShowFailAlert: needShowFailAlert, modelType: modelType) { model, responseModel in
             continuation.resume(returning: (model,responseModel))
