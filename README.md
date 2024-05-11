@@ -1,5 +1,16 @@
 [文章掘金地址](https://juejin.im/post/5acabf5b6fb9a028c71ebb10)
 
+
+-------2024.05.11 update----
+
+最近换了新的公司，公司的项目比较新兼容的版本也比较高，使用的Codable进行的JSON模型转换。
+随着HandyJSON 放弃维护和 Codable 日益强大 
+最新版的Demo JSON转模型使用Codable进行转换。 
+移除了HandyJSON 和 ObjectMapper
+
+如仍然需要ObjectMapper Demo的小伙伴可以切换到[feature/ObjectMapper分支](https://github.com/Liaoworking/MoyaNetworkTool/tree/feature/ObjectMapper)查看
+
+
 -------2021.03.11 update----
 
 Moya已经使用有3年了，但之前的封装总感觉欠缺点什么，要么就是写起来不够优美，要么部分地方感觉冗余。
