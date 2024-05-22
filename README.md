@@ -2,6 +2,7 @@
 
 
 -------2024.05.11 update----
+
 写本项目的时候Codable才刚刚推出，还不完善,就一直用的是HandyJSON和ObjectMapper做的JSON转模型。
 
 最近换了新的公司，公司的项目比较新兼容的版本也比较高，使用的Codable进行的JSON模型转换。
